@@ -33,19 +33,17 @@
           <!-- Reply Form -->
           <form method="post" action="/reply_feedback/?id={{ feedback.id }}">
             {% csrf_token %}
-            
+
             <div class="form-group mb-4">
               <label class="text-white">Your Reply</label>
-              <textarea name="admin_reply" 
-                        class="form-control gaming-input" 
-                        rows="5"
-                        required>{{ feedback.admin_reply|default:'' }}</textarea>
+              <textarea name="admin_reply" class="form-control gaming-input" rows="5"
+                required>{{ feedback.admin_reply|default:'' }}</textarea>
             </div>
 
             <button type="submit" class="btn gaming-btn w-100">
-              Send Reply
+              {% if feedback.admin_reply %}Update Reply{% else %}Send Reply{% endif %}
             </button>
-            
+
             <a href="/admin_view_feedback/" class="btn btn-outline-light w-100 mt-3 rounded-pill">
               Cancel
             </a>
@@ -65,21 +63,25 @@
     text-transform: uppercase;
     text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
   }
+
   .gaming-card {
     background: #0b0f17;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
   }
+
   .gaming-input {
     background: #05070c;
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: #fff;
   }
+
   .gaming-input:focus {
     background: #05070c;
     color: #fff;
     border-color: #00ffff;
   }
+
   .gaming-btn {
     background: linear-gradient(135deg, #00c6ff, #0072ff);
     border: none;

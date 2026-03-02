@@ -82,6 +82,7 @@ urlpatterns = [
     path("delete_feedback/", views.delete_feedback),
     path("admin_view_feedback/", views.admin_view_feedback),
     path("reply_feedback/", views.reply_feedback),
+    path("admin_delete_reply/", views.admin_delete_reply),
 
     # Notifications
     path("view_notifications/", views.view_notifications),

@@ -64,7 +64,8 @@
                     <td>
                       <div class="rating-stars">
                         {% for i in "12345" %}
-                        <i class="fas fa-star {% if forloop.counter > f.rating %}text-muted{% else %}text-warning{% endif %}"></i>
+                        <i
+                          class="fas fa-star {% if forloop.counter > f.rating %}text-muted{% else %}text-warning{% endif %}"></i>
                         {% endfor %}
                       </div>
                     </td>
@@ -95,10 +96,20 @@
                     </td>
 
                     <td class="text-center">
-                      <a href="/reply_feedback/?id={{ f.id }}"
-                         class="btn gaming-btn-sm">
+                      {% if f.admin_reply %}
+                      <a href="/reply_feedback/?id={{ f.id }}" class="btn btn-sm btn-outline-info mr-1"
+                        title="Edit Reply">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                      <a href="/admin_delete_reply/?id={{ f.id }}" class="btn btn-sm btn-outline-danger"
+                        title="Delete Reply" onclick="return confirm('Delete this reply?');">
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                      {% else %}
+                      <a href="/reply_feedback/?id={{ f.id }}" class="btn gaming-btn-sm">
                         Reply
                       </a>
+                      {% endif %}
                     </td>
                   </tr>
 

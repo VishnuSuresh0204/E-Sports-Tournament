@@ -1303,21 +1303,48 @@ def reply_feedback(request):
 
     if request.method == "POST":
         reply = request.POST.get("admin_reply")
+        is_update = bool(feedback.admin_reply)
+        
         feedback.admin_reply = reply
         feedback.reply_date = datetime.now()
         feedback.save()
 
         # Notification
+        msg = f"Admin has updated their reply to your feedback on '{feedback.tournament.name}'." if is_update else f"Admin has replied to your feedback on '{feedback.tournament.name}'."
         Notification.objects.create(
             recipient=feedback.user.login,
-            message=f"Admin has replied to your feedback on '{feedback.tournament.name}'.",
+            message=msg,
             link="/view_feedback/"
         )
 
-        messages.success(request, "Reply sent successfully.")
+        messages.success(request, "Reply updated successfully." if is_update else "Reply sent successfully.")
         return redirect("/admin_view_feedback/")
 
     return render(request, "ADMIN/reply_feedback.html", {"feedback": feedback})
+
+
+def admin_delete_reply(request):
+    # Admin check
+    if not request.user.is_authenticated or (
+        not request.user.is_superuser
+        and not request.user.is_staff
+        and request.user.usertype != "admin"
+    ):
+        messages.error(request, "Admin login required.")
+        return redirect("/login/")
+
+    feedback_id = request.GET.get("id")
+    feedback = Feedback.objects.filter(id=feedback_id).first()
+
+    if feedback:
+        feedback.admin_reply = None
+        feedback.reply_date = None
+        feedback.save()
+        messages.success(request, "Admin reply deleted successfully.")
+    else:
+        messages.error(request, "Feedback not found.")
+
+    return redirect("/admin_view_feedback/")
 
 
 # ------------------------------------------------
