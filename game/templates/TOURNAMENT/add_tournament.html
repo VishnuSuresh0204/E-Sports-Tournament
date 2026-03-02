@@ -15,115 +15,141 @@
     <!-- Page Title -->
     <div class="row mb-5">
       <div class="col-12 text-center">
-        <h2 class="gaming-title">Add Tournament</h2>
-        <p class="text-muted">
-          Create and manage a new esports tournament
+        <h2 class="gaming-title" style="font-size: 3rem; margin-bottom: 0.5rem;">Create Tournament</h2>
+        <p class="text-info text-uppercase fw-bold" style="letter-spacing: 4px; font-size: 0.8rem;">
+          Architect the next legend in esports
         </p>
       </div>
     </div>
 
     <!-- Add Tournament Form -->
     <div class="row justify-content-center">
-      <div class="col-lg-8">
+      <div class="col-lg-10">
 
-        <div class="card gaming-card p-4 p-md-5">
+        <div class="card glass-panel neon-border-azure p-4 p-md-5">
 
-          <h4 class="text-white mb-4">Tournament Details</h4>
-
-          <form class="form-contact contact_form" action="/add_tournament/" method="post" novalidate>
-
+          <form action="/add_tournament/" method="post" novalidate>
             {% csrf_token %}
 
+            <!-- Section 1: Basic Information -->
+            <div class="gaming-section-title">
+              <i class="fas fa-info-circle mr-2"></i> Basic Information
+            </div>
+
             <div class="row">
-
-              <!-- Tournament Name -->
-              <div class="col-12 mb-4">
-                <label class="form-label text-white">Tournament Name</label>
-                <input class="form-control gaming-input" name="name" type="text" placeholder="Enter tournament name"
-                  required>
+              <div class="col-md-8 mb-4">
+                <label class="form-label text-white small text-uppercase">Tournament Name</label>
+                <div class="input-icon-wrapper">
+                  <input class="form-control gaming-input" name="name" type="text"
+                    placeholder="e.g. Midnight Clash Series" required>
+                  <i class="fas fa-trophy"></i>
+                </div>
               </div>
 
-              <!-- Game Selection -->
-              <div class="col-12 mb-4">
-                <label class="form-label text-white">Select Game</label>
-                <select class="form-control gaming-input" name="game" required>
-                  <option value="">Select Game</option>
-                  {% for g in games %}
-                  <option value="{{ g.id }}">{{ g.name }}</option>
-                  {% endfor %}
-                </select>
+              <div class="col-md-4 mb-4">
+                <label class="form-label text-white small text-uppercase">Select Game</label>
+                <div class="input-icon-wrapper">
+                  <select class="form-control gaming-input" name="game" required>
+                    <option value="">Select Game</option>
+                    {% for g in games %}
+                    <option value="{{ g.id }}">{{ g.name }}</option>
+                    {% endfor %}
+                  </select>
+                  <i class="fas fa-gamepad"></i>
+                </div>
               </div>
 
-              <!-- Description -->
-              <div class="col-12 mb-4">
-                <label class="form-label text-white">Description</label>
-                <textarea class="form-control gaming-input" name="description" rows="4"
-                  placeholder="Tournament description"></textarea>
+              <div class="col-12 mb-5">
+                <label class="form-label text-white small text-uppercase">Tournament Description</label>
+                <div class="input-icon-wrapper">
+                  <textarea class="form-control gaming-input" name="description" rows="3"
+                    placeholder="Brief ruleset and details..."></textarea>
+                  <i class="fas fa-align-left" style="top: 25px;"></i>
+                </div>
               </div>
+            </div>
 
-              <!-- Start & End Date -->
+            <!-- Section 2: Timeline & Logistics -->
+            <div class="gaming-section-title">
+              <i class="fas fa-calendar-alt mr-2"></i> Timeline & Logistics
+            </div>
+
+            <div class="row">
               <div class="col-md-6 mb-4">
-                <label class="form-label text-white">Start Date</label>
+                <label class="form-label text-white small text-uppercase">Tournament Start</label>
                 <input class="form-control gaming-input" name="start_date" type="datetime-local">
               </div>
-
               <div class="col-md-6 mb-4">
-                <label class="form-label text-white">End Date</label>
+                <label class="form-label text-white small text-uppercase">Tournament End</label>
                 <input class="form-control gaming-input" name="end_date" type="datetime-local">
               </div>
 
-              <!-- Registration Dates -->
               <div class="col-md-6 mb-4">
-                <label class="form-label text-white">Registration Open</label>
+                <label class="form-label text-white small text-uppercase">Registration Opens</label>
                 <input class="form-control gaming-input" name="registration_open_at" type="datetime-local">
               </div>
-
               <div class="col-md-6 mb-4">
-                <label class="form-label text-white">Registration Close</label>
+                <label class="form-label text-white small text-uppercase">Registration Closes</label>
                 <input class="form-control gaming-input" name="registration_close_at" type="datetime-local">
               </div>
 
-              <!-- Max Teams / Fees -->
-              <div class="col-md-4 mb-4">
-                <label class="form-label text-white">Max Teams</label>
-                <input class="form-control gaming-input" name="max_teams" type="number" placeholder="Default 16">
-              </div>
-
-              <div class="col-md-4 mb-4">
-                <label class="form-label text-white">Entry Fee</label>
-                <input class="form-control gaming-input" name="entry_fee" type="number" step="0.01"
-                  placeholder="Entry fee">
-              </div>
-
-              <div class="col-md-4 mb-4">
-                <label class="form-label text-white">Prize Pool</label>
-                <input class="form-control gaming-input" name="prize_pool" type="number" step="0.01"
-                  placeholder="Prize pool">
-              </div>
-
-              <!-- Online / Location -->
-              <div class="col-12 mb-4">
-                <div class="form-check mb-2">
-                  <input type="checkbox" class="form-check-input" name="is_online" id="is_online">
-                  <label class="form-check-label text-white" for="is_online">
-                    Online Tournament
-                  </label>
+              <div class="col-md-6 mb-4">
+                <div class="form-check p-0 mt-2">
+                  <div class="custom-control custom-checkbox gaming-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="is_online" id="is_online">
+                    <label class="custom-control-label text-white" for="is_online">Streaming / Online Only</label>
+                  </div>
                 </div>
-
-                <input class="form-control gaming-input" name="location" type="text"
-                  placeholder="Location (if offline)">
               </div>
+              <div class="col-md-6 mb-4">
+                <div class="input-icon-wrapper">
+                  <input class="form-control gaming-input" name="location" type="text"
+                    placeholder="Venue Location (if physical)">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+              </div>
+            </div>
 
+            <!-- Section 3: Economics & Scale -->
+            <div class="gaming-section-title mt-4">
+              <i class="fas fa-coins mr-2"></i> Economics & Scale
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <label class="form-label text-white small text-uppercase">Max Participants</label>
+                <div class="input-icon-wrapper">
+                  <input class="form-control gaming-input" name="max_teams" type="number" placeholder="16">
+                  <i class="fas fa-users"></i>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label class="form-label text-white small text-uppercase">Entry Fee ($)</label>
+                <div class="input-icon-wrapper">
+                  <input class="form-control gaming-input" name="entry_fee" type="number" step="0.01"
+                    placeholder="0.00">
+                  <i class="fas fa-ticket-alt"></i>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <label class="form-label text-white small text-uppercase">Prize Pool ($)</label>
+                <div class="input-icon-wrapper">
+                  <input class="form-control gaming-input" name="prize_pool" type="number" step="0.01"
+                    placeholder="500.00">
+                  <i class="fas fa-award"></i>
+                </div>
+              </div>
             </div>
 
             <!-- Buttons -->
-            <div class="d-flex flex-column flex-md-row justify-content-between mt-4 gap-3">
-              <button type="submit" class="btn gaming-btn flex-fill">
-                Save Tournament
+            <div class="mt-5 d-flex flex-column flex-md-row justify-content-center gap-4">
+              <button type="submit" class="gaming-btn-premium px-5 py-3">
+                <i class="fas fa-rocket mr-2"></i> Launch Tournament
               </button>
 
-              <a href="/tc_view_tournament/" class="btn gaming-btn-secondary flex-fill text-center">
-                Back
+              <a href="/tc_view_tournament/" class="btn btn-outline-info rounded-0 d-flex align-items-center px-5"
+                style="border-width: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">
+                Cancel
               </a>
             </div>
 
@@ -136,6 +162,13 @@
 
   </div>
 </section>
+
+<style>
+  .gaming-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #00c6ff;
+    border-color: #00c6ff;
+  }
+</style>
 
 </section>
 
