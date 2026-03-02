@@ -31,10 +31,8 @@
 
         <div class="card gaming-card p-4 p-md-5">
 
-          <form class="form-contact contact_form"
-                action="/update_match_result/?id={{ match.id }}"
-                method="post"
-                novalidate="novalidate">
+          <form class="form-contact contact_form" action="/update_match_result/?id={{ match.id }}" method="post"
+            novalidate="novalidate">
 
             {% csrf_token %}
 
@@ -45,12 +43,8 @@
                 <label class="form-label text-white">
                   {{ match.team1.name }} Score
                 </label>
-                <input
-                  class="form-control gaming-input"
-                  name="team1_score"
-                  type="number"
-                  min="0"
-                  value="{{ match.team1_score }}">
+                <input class="form-control gaming-input" name="team1_score" type="number" min="0"
+                  value="{{ match.team1_score }}" required>
               </div>
 
               <!-- Team 2 Score -->
@@ -58,12 +52,8 @@
                 <label class="form-label text-white">
                   {{ match.team2.name }} Score
                 </label>
-                <input
-                  class="form-control gaming-input"
-                  name="team2_score"
-                  type="number"
-                  min="0"
-                  value="{{ match.team2_score }}">
+                <input class="form-control gaming-input" name="team2_score" type="number" min="0"
+                  value="{{ match.team2_score }}" required>
               </div>
 
             </div>
@@ -74,8 +64,7 @@
                 Save Result
               </button>
 
-              <a href="/view_matches/?tournament_id={{ match.tournament.id }}"
-                 class="btn gaming-btn-secondary">
+              <a href="/view_matches/?tournament_id={{ match.tournament.id }}" class="btn gaming-btn-secondary">
                 Back
               </a>
             </div>

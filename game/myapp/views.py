@@ -844,8 +844,29 @@ def edit_tournament(request):
         tournament.name = request.POST.get("name", tournament.name)
         tournament.description = request.POST.get("description", tournament.description)
         tournament.status = request.POST.get("status", tournament.status)
-        tournament.start_date = request.POST.get("start_date") or tournament.start_date
-        tournament.end_date = request.POST.get("end_date") or tournament.end_date
+        # Date validation: no past dates
+        now = datetime.now()
+        start_date_str = request.POST.get("start_date")
+        end_date_str = request.POST.get("end_date")
+        
+        try:
+            if start_date_str:
+                sd = datetime.strptime(start_date_str, '%Y-%m-%dT%H:%M')
+                if sd < now:
+                    messages.error(request, "Start date cannot be in the past")
+                    return redirect(f"/tc_edit_tournament/?id={tournament.id}")
+                tournament.start_date = start_date_str
+
+            if end_date_str:
+                ed = datetime.strptime(end_date_str, '%Y-%m-%dT%H:%M')
+                if ed < now:
+                    messages.error(request, "End date cannot be in the past")
+                    return redirect(f"/tc_edit_tournament/?id={tournament.id}")
+                tournament.end_date = end_date_str
+        except Exception as e:
+            # If date format is different (e.g. from DB), just continue
+            pass
+
         tournament.registration_open_at = request.POST.get("registration_open_at") or tournament.registration_open_at
         tournament.registration_close_at = request.POST.get("registration_close_at") or tournament.registration_close_at
         

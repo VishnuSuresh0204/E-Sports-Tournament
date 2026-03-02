@@ -28,10 +28,7 @@
 
           <h4 class="text-white mb-4">Game Details</h4>
 
-          <form class="form-contact contact_form"
-                action="/edit_game/?id={{ game.id }}"
-                method="post"
-                novalidate>
+          <form class="form-contact contact_form" action="/edit_game/?id={{ game.id }}" method="post" novalidate>
 
             {% csrf_token %}
 
@@ -40,28 +37,22 @@
               <!-- Game Name -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Game Name</label>
-                <input class="form-control gaming-input"
-                       name="name"
-                       type="text"
-                       value="{{ game.name }}"
-                       required>
+                <input class="form-control gaming-input" name="name" type="text" value="{{ game.name }}" required
+                  minlength="3">
               </div>
 
               <!-- Team Size -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team Size</label>
-                <input class="form-control gaming-input"
-                       name="team_size"
-                       type="number"
-                       value="{{ game.team_size }}">
+                <input class="form-control gaming-input" name="team_size" type="number" value="{{ game.team_size }}"
+                  min="1" max="50" required>
               </div>
 
               <!-- Description -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Description</label>
-                <textarea class="form-control gaming-input"
-                          name="description"
-                          rows="4">{{ game.description }}</textarea>
+                <textarea class="form-control gaming-input" name="description" rows="4" required
+                  minlength="10">{{ game.description }}</textarea>
               </div>
 
               <!-- Status -->
@@ -70,22 +61,16 @@
                 <div class="d-flex gap-4 mt-2">
 
                   <div class="form-check">
-                    <input class="form-check-input"
-                           type="radio"
-                           name="status"
-                           value="1"
-                           {% if game.status == 1 %}checked{% endif %}>
+                    <input class="form-check-input" type="radio" name="status" value="1" {% if game.status==1
+                      %}checked{% endif %}>
                     <label class="form-check-label text-white">
                       Active
                     </label>
                   </div>
 
                   <div class="form-check">
-                    <input class="form-check-input"
-                           type="radio"
-                           name="status"
-                           value="0"
-                           {% if game.status == 0 %}checked{% endif %}>
+                    <input class="form-check-input" type="radio" name="status" value="0" {% if game.status==0
+                      %}checked{% endif %}>
                     <label class="form-check-label text-white">
                       Inactive
                     </label>
@@ -102,8 +87,7 @@
                 Update Game
               </button>
 
-              <a href="/tc_view_game/"
-                 class="btn gaming-btn-secondary flex-fill text-center">
+              <a href="/tc_view_game/" class="btn gaming-btn-secondary flex-fill text-center">
                 Back to Games
               </a>
             </div>

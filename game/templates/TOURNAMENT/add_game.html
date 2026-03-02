@@ -37,20 +37,22 @@
               <!-- Game Name -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Game Name</label>
-                <input class="form-control gaming-input" name="name" type="text" placeholder="Enter game name" required>
+                <input class="form-control gaming-input" name="name" type="text" placeholder="Enter game name" required
+                  minlength="3">
               </div>
 
               <!-- Team Size -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team Size</label>
-                <input class="form-control gaming-input" name="team_size" type="number" min="1" placeholder="Default 5">
+                <input class="form-control gaming-input" name="team_size" type="number" min="1" max="50" required
+                  placeholder="Default 5">
               </div>
 
               <!-- Description -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Description</label>
                 <textarea class="form-control gaming-input" name="description" rows="4"
-                  placeholder="Enter game description"></textarea>
+                  placeholder="Enter game description" required minlength="10"></textarea>
               </div>
 
             </div>
