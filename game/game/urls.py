@@ -78,6 +78,8 @@ urlpatterns = [
     # Feedback
     path("add_feedback/", views.add_feedback),
     path("view_feedback/", views.view_feedback),
+    path("edit_feedback/", views.edit_feedback),
+    path("delete_feedback/", views.delete_feedback),
     path("admin_view_feedback/", views.admin_view_feedback),
     path("reply_feedback/", views.reply_feedback),
 

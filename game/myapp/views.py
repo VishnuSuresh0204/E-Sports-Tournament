@@ -1052,6 +1052,12 @@ def add_feedback(request):
         messages.error(request, "Tournament not found.")
         return redirect("/user_view_tournaments/")
 
+    # Check if feedback already exists for this tournament by this user
+    existing_feedback = Feedback.objects.filter(user=player, tournament=tournament).first()
+    if existing_feedback:
+        messages.info(request, "You have already submitted feedback for this tournament. You can edit it from 'My Feedback' page.")
+        return redirect("/view_feedback/")
+
     if request.method == "POST":
         rating = request.POST.get("rating")
         subject = request.POST.get("subject")
@@ -1080,6 +1086,48 @@ def view_feedback(request):
     player = PlayerProfile.objects.filter(login_id=user_id).first()
     feedbacks = Feedback.objects.filter(user=player).order_by("-created_at")
     return render(request, "USER/view_feedback.html", {"feedbacks": feedbacks})
+
+
+def edit_feedback(request):
+    user_id = request.session.get("user_id")
+    if not user_id:
+        return redirect("/login/")
+
+    feedback_id = request.GET.get("id") or request.POST.get("feedback_id")
+    player = PlayerProfile.objects.filter(login_id=user_id).first()
+    feedback = Feedback.objects.filter(id=feedback_id, user=player).first()
+
+    if not feedback:
+        messages.error(request, "Feedback not found.")
+        return redirect("/view_feedback/")
+
+    if request.method == "POST":
+        feedback.rating = request.POST.get("rating")
+        feedback.subject = request.POST.get("subject")
+        feedback.message = request.POST.get("message")
+        feedback.save()
+        messages.success(request, "Feedback updated successfully.")
+        return redirect("/view_feedback/")
+
+    return render(request, "USER/edit_feedback.html", {"feedback": feedback})
+
+
+def delete_feedback(request):
+    user_id = request.session.get("user_id")
+    if not user_id:
+        return redirect("/login/")
+
+    feedback_id = request.GET.get("id")
+    player = PlayerProfile.objects.filter(login_id=user_id).first()
+    feedback = Feedback.objects.filter(id=feedback_id, user=player).first()
+
+    if feedback:
+        feedback.delete()
+        messages.success(request, "Feedback deleted successfully.")
+    else:
+        messages.error(request, "Feedback not found.")
+
+    return redirect("/view_feedback/")
 
 
 def admin_view_feedback(request):

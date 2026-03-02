@@ -74,9 +74,11 @@
               </td>
 
               <td class="text-center">
-                <a href="/delete_feedback/?id={{ f.id }}"
-                   class="gaming-btn danger"
-                   onclick="return confirm('Erase this record permanently?');">
+                <a href="/edit_feedback/?id={{ f.id }}" class="gaming-btn info mr-1" title="Edit Feedback">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a href="/delete_feedback/?id={{ f.id }}" class="gaming-btn danger"
+                  onclick="return confirm('Erase this record permanently?');">
                   <i class="fas fa-trash-alt"></i>
                 </a>
               </td>
@@ -126,7 +128,7 @@
   .gaming-card {
     background: #0b0f17;
     border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
   }
 
@@ -142,7 +144,7 @@
   }
 
   .table-dark td {
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     vertical-align: middle;
   }
 
@@ -181,8 +183,18 @@
     border-color: #ff4d4d;
   }
 
+  .gaming-btn.info {
+    color: #17a2b8;
+    border-color: #17a2b8;
+  }
+
   .gaming-btn.danger:hover {
     background: #ff4d4d;
+    color: #fff;
+  }
+
+  .gaming-btn.info:hover {
+    background: #17a2b8;
     color: #fff;
   }
 </style>
