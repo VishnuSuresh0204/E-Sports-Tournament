@@ -53,6 +53,8 @@ urlpatterns = [
     
     path("admin_view_users/", views.admin_view_users),
     path("admin_view_tc/", views.admin_view_tc),
+    path("admin_approve_tc/", views.admin_approve_tc),
+    path("admin_reject_tc/", views.admin_reject_tc),
 
 
     # Teams & Members
@@ -78,6 +80,10 @@ urlpatterns = [
     path("view_feedback/", views.view_feedback),
     path("admin_view_feedback/", views.admin_view_feedback),
     path("reply_feedback/", views.reply_feedback),
+
+    # Notifications
+    path("view_notifications/", views.view_notifications),
+    path("mark_notification_read/", views.mark_notification_read),
 
 ]
 

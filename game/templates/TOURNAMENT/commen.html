@@ -43,6 +43,16 @@
             <li class="nav-item"><a class="nav-link" href="/tc_view_team_requests/">Team Requests</a></li>
             <li class="nav-item"><a class="nav-link" href="/tc_view_matches/">Matches</a></li>
             <li class="nav-item"><a class="nav-link" href="/tc_profile/">Profile</a></li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/view_notifications/" title="Notifications">
+                <i class="fas fa-bell"></i>
+                {% if unread_notifications_count > 0 %}
+                <span class="badge badge-danger badge-pill">{{ unread_notifications_count }}</span>
+                {% endif %}
+              </a>
+            </li>
+
             <li class="nav-item"><a class="nav-link btn_1 ml-lg-3" href="/login/">Logout</a></li>
           </ul>
         </div>
@@ -51,6 +61,20 @@
     </div>
   </header>
   <!-- HEADER END -->
+
+  <!-- MESSAGES -->
+  <div class="container mt-3" style="position: relative; z-index: 9999;">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show gaming-alert" role="alert">
+      {{ message }}
+      <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
 
   <!-- PAGE CONTENT -->
   {% block content %}
@@ -167,6 +191,40 @@
       .section_padding {
         margin-top: 160px;
       }
+    }
+
+    /* GAMING ALERTS */
+    .gaming-alert {
+      background: rgba(11, 15, 23, 0.9);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      color: #fff;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .alert-success {
+      border-color: rgba(40, 167, 69, 0.5);
+      box-shadow: 0 0 20px rgba(40, 167, 69, 0.1);
+    }
+
+    .alert-danger {
+      border-color: rgba(220, 53, 69, 0.5);
+      box-shadow: 0 0 20px rgba(220, 53, 69, 0.1);
+    }
+
+    .alert-warning {
+      border-color: rgba(255, 193, 7, 0.5);
+      box-shadow: 0 0 20px rgba(255, 193, 7, 0.1);
+    }
+
+    .badge-danger {
+      background: #ff4d4d;
+      font-size: 10px;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      border: 2px solid #000;
     }
   </style>
 

@@ -62,6 +62,11 @@ def login(request):
 
             # Tournament Constructor
             elif user.usertype == "tournament_constructor":
+                tc_profile = TournamentConstructor.objects.filter(loginid=user).first()
+                if tc_profile and tc_profile.status != "active":
+                    messages.error(request, f"Your account status is: {tc_profile.status}. Access denied.")
+                    return redirect("/login/")
+                
                 request.session["tc_id"] = user.id  # separate session key
                 messages.success(request, "Login successful (Tournament Constructor)")
                 return redirect("/tc_home/")  # redirect to their dashboard
@@ -236,6 +241,50 @@ def admin_view_tc(request):
 
     tcs = TournamentConstructor.objects.select_related("loginid").all().order_by("-id")
     return render(request, "ADMIN/view_tc.html", {"tcs": tcs})
+
+
+def admin_approve_tc(request):
+    if not request.user.is_authenticated or request.user.usertype != "admin":
+        return redirect("/login/")
+    
+    tid = request.GET.get("id")
+    tc = TournamentConstructor.objects.filter(id=tid).first()
+    if tc:
+        tc.status = "active"
+        tc.save()
+        
+        # Notification
+        Notification.objects.create(
+            recipient=tc.loginid,
+            message="Your account has been APPROVED by the administrator. You can now host tournaments!",
+            link="/tc_home/"
+        )
+        
+        messages.success(request, f"Constructor '{tc.name}' approved.")
+    
+    return redirect("/admin_view_tc/")
+
+
+def admin_reject_tc(request):
+    if not request.user.is_authenticated or request.user.usertype != "admin":
+        return redirect("/login/")
+    
+    tid = request.GET.get("id")
+    tc = TournamentConstructor.objects.filter(id=tid).first()
+    if tc:
+        tc.status = "blocked"
+        tc.save()
+        
+        # Notification
+        Notification.objects.create(
+            recipient=tc.loginid,
+            message="Your constructor registration has been Rejected/Blocked by the administrator.",
+            link="/"
+        )
+        
+        messages.success(request, f"Constructor '{tc.name}' rejected.")
+    
+    return redirect("/admin_view_tc/")
 
 
 # ------------------------------------------------
@@ -515,6 +564,13 @@ def tc_approve_team_request(request):
     tr.created_team = team
     tr.save()
 
+    # Notification
+    Notification.objects.create(
+        recipient=tr.requested_by.login,
+        message=f"Your team creation request for '{tr.team_name}' has been APPROVED.",
+        link="/user_view_teams/"
+    )
+
     messages.success(request, "Team created and request approved")
     return redirect("/tc_view_team_requests/")
 
@@ -531,6 +587,14 @@ def tc_reject_team_request(request):
     if tr:
         tr.status = "Rejected"
         tr.save()
+        
+        # Notification
+        Notification.objects.create(
+            recipient=tr.requested_by.login,
+            message=f"Your team creation request for '{tr.team_name}' has been Rejected.",
+            link="/user_team_requests/"
+        )
+
         messages.success(request, "Team request rejected")
     else:
         messages.error(request, "Request not found")
@@ -1064,6 +1128,14 @@ def tc_update_registration_status(request):
     if registration:
         registration.status = status
         registration.save()
+        
+        # Notification
+        Notification.objects.create(
+            recipient=registration.team.captain.login,
+            message=f"Your registration for tournament '{registration.tournament.name}' has been {status}.",
+            link="/user_view_registrations/"
+        )
+
         messages.success(request, f"Registration {status.lower()} successfully.")
     else:
         messages.error(request, "Registration not found.")
@@ -1115,6 +1187,11 @@ def add_match(request):
             round_name=round_name,
             status="Scheduled"
         )
+
+        # Notifications
+        msg = f"New match scheduled for your team '{team1.name}' vs '{team2.name}' in '{tournament.name}'."
+        Notification.objects.create(recipient=team1.captain.login, message=msg, link="/user_view_matches/")
+        Notification.objects.create(recipient=team2.captain.login, message=msg, link="/user_view_matches/")
 
         messages.success(request, "Match added successfully")
         return redirect("/tc_view_matches/")
@@ -1180,6 +1257,14 @@ def reply_feedback(request):
         feedback.admin_reply = reply
         feedback.reply_date = datetime.now()
         feedback.save()
+
+        # Notification
+        Notification.objects.create(
+            recipient=feedback.user.login,
+            message=f"Admin has replied to your feedback on '{feedback.tournament.name}'.",
+            link="/view_feedback/"
+        )
+
         messages.success(request, "Reply sent successfully.")
         return redirect("/admin_view_feedback/")
 
@@ -1218,3 +1303,29 @@ def tc_profile_edit(request):
         return redirect("/tc_profile/")
 
     return render(request, "TOURNAMENT/edit_profile.html", {"profile": profile})
+
+
+# ----------------------------------------------------
+# 15. Notifications Views
+# ----------------------------------------------------
+def view_notifications(request):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
+    
+    notifications = Notification.objects.filter(recipient=request.user).order_by("-created_at")
+    return render(request, "notifications.html", {"notifications": notifications})
+
+
+def mark_notification_read(request):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
+    
+    nid = request.GET.get("id")
+    notification = Notification.objects.filter(id=nid, recipient=request.user).first()
+    if notification:
+        notification.is_read = True
+        notification.save()
+        if notification.link:
+            return redirect(notification.link)
+    
+    return redirect("/view_notifications/")

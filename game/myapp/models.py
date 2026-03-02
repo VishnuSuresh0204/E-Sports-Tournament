@@ -222,3 +222,17 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback by {self.user.gamer_tag} for {self.tournament}"
+
+
+# ----------------------------------------------------
+# 11. Notification
+# ----------------------------------------------------
+class Notification(models.Model):
+    recipient = models.ForeignKey(Login, on_delete=models.CASCADE)
+    message = models.TextField()
+    link = models.CharField(max_length=200, blank=True, null=True)
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"To {self.recipient.username}: {self.message[:30]}..."

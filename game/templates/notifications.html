@@ -1,0 +1,130 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE WRAPPER -->
+<section class="section_padding py-5 user-page">
+
+    <!-- Page Header -->
+    <div class="container mb-5 text-center">
+        <h2 class="gaming-title">
+            <i class="fas fa-bell text-warning mr-2"></i>
+            Communications Center
+        </h2>
+        <p class="text-muted mb-0">
+            Stay updated with your latest alerts and notifications
+        </p>
+    </div>
+
+    <!-- Notifications List -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+
+                <div class="card gaming-card overflow-hidden">
+                    <div class="list-group list-group-flush">
+
+                        {% for n in notifications %}
+                        <a href="{% if not n.is_read %}/mark_notification_read/?id={{ n.id }}{% elif n.link %}{{ n.link }}{% else %}#{% endif %}"
+                            class="list-group-item list-group-item-action bg-dark border-secondary py-4 {% if not n.is_read %}unread-notif{% endif %}">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <div class="notif-icon-circle mr-3 {% if n.is_read %}read{% endif %}">
+                                        <i
+                                            class="fas {% if 'approved' in n.message|lower %}fa-check-circle text-success{% elif 'rejected' in n.message|lower %}fa-times-circle text-danger{% else %}fa-info-circle text-info{% endif %}"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 text-white {% if not n.is_read %}fw-bold{% endif %}">
+                                            {{ n.message }}
+                                        </p>
+                                        <small class="text-muted">
+                                            <i class="far fa-clock mr-1"></i>
+                                            {{ n.created_at|timesince }} ago
+                                        </small>
+                                    </div>
+                                </div>
+                                {% if not n.is_read %}
+                                <span class="badge badge-primary badge-pill">NEW</span>
+                                {% endif %}
+                            </div>
+                        </a>
+                        {% empty %}
+                        <div class="py-5 text-center">
+                            <div class="text-muted">
+                                <i class="fas fa-bell-slash fa-3x mb-3"></i>
+                                <p>No transmissions received yet.</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- STYLES -->
+<style>
+    .user-page {
+        margin-top: 130px;
+    }
+
+    @media (max-width: 768px) {
+        .user-page {
+            margin-top: 160px;
+        }
+    }
+
+    .gaming-title {
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-shadow: 0 0 12px rgba(255, 193, 7, 0.6);
+    }
+
+    .gaming-card {
+        background: #0b0f17;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 30px rgba(255, 193, 7, 0.15);
+    }
+
+    .list-group-item {
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .list-group-item:hover {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .unread-notif {
+        background-color: rgba(0, 123, 255, 0.05) !important;
+        border-left: 4px solid #007bff !important;
+    }
+
+    .notif-icon-circle {
+        width: 45px;
+        height: 45px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+
+    .notif-icon-circle.read {
+        opacity: 0.6;
+    }
+
+    .fw-bold {
+        font-weight: 700;
+    }
+</style>
+
+{% endblock %}
