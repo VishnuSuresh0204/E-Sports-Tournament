@@ -29,6 +29,7 @@
               <th class="px-4">Tournament</th>
               <th>Team</th>
               <th>Registered On</th>
+              <th>Payment</th>
               <th class="text-center">Status</th>
             </tr>
           </thead>
@@ -62,13 +63,28 @@
               <!-- Status -->
               <td class="text-center">
                 {% if r.status == 'Pending' %}
-                  <span class="gaming-badge warning">Pending</span>
+                <span class="gaming-badge warning">Pending</span>
                 {% elif r.status == 'Approved' %}
-                  <span class="gaming-badge success">Approved</span>
+                <span class="gaming-badge success">Approved</span>
                 {% elif r.status == 'Rejected' %}
-                  <span class="gaming-badge danger">Rejected</span>
+                <span class="gaming-badge danger">Rejected</span>
                 {% else %}
-                  <span class="gaming-badge neutral">{{ r.status }}</span>
+                <span class="gaming-badge neutral">{{ r.status }}</span>
+                {% endif %}
+              </td>
+
+              <!-- Payment -->
+              <td>
+                {% if r.payment_status == 'Paid' %}
+                <span class="text-success small fw-bold">
+                  <i class="fas fa-check-circle mr-1"></i> Paid
+                </span>
+                {% elif r.payment_status == 'Pending' and r.tournament.entry_fee > 0 %}
+                <a href="/tournament_payment/?reg_id={{ r.id }}" class="text-warning small fw-bold">
+                  <i class="fas fa-clock mr-1"></i> Pay Now
+                </a>
+                {% else %}
+                <span class="text-muted small">N/A</span>
                 {% endif %}
               </td>
 
@@ -76,7 +92,7 @@
 
             {% empty %}
             <tr>
-              <td colspan="4" class="text-center py-5">
+              <td colspan="5" class="text-center py-5">
                 <div class="text-muted">
                   <i class="fas fa-clipboard-list fa-3x mb-3"></i>
                   <p>Your deployment history is empty.</p>
@@ -120,7 +136,7 @@
   .gaming-card {
     background: #0b0f17;
     border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 30px rgba(40, 167, 69, 0.15);
   }
 
@@ -136,7 +152,7 @@
   }
 
   .table-dark td {
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     vertical-align: middle;
   }
 

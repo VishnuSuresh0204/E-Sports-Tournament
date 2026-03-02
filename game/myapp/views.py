@@ -920,11 +920,20 @@ def user_register_tournament(request):
             messages.info(request, "This team is already registered for this tournament")
             return redirect("/user_view_tournaments/")
 
-        TournamentRegistration.objects.create(
+        # Default payment status
+        pay_status = "Pending"
+        if tournament.entry_fee == 0:
+            pay_status = "Not Required"
+
+        reg = TournamentRegistration.objects.create(
             tournament=tournament,
             team=team,
             status="Pending",
+            payment_status=pay_status
         )
+
+        if tournament.entry_fee > 0:
+            return redirect(f"/tournament_payment/?reg_id={reg.id}")
 
         messages.success(request, "Registration submitted")
         return redirect("/user_view_tournaments/")
@@ -934,6 +943,29 @@ def user_register_tournament(request):
         "USER/register_tournament.html",
         {"tournament": tournament, "teams": teams},
     )
+
+
+def tournament_payment(request):
+    user_id = request.session.get("user_id")
+    if not user_id:
+        return redirect("/login/")
+
+    reg_id = request.GET.get("reg_id")
+    reg = TournamentRegistration.objects.filter(id=reg_id, team__captain__login_id=user_id).first()
+
+    if not reg:
+        messages.error(request, "Registration record not found.")
+        return redirect("/user_view_tournaments/")
+
+    if request.method == "POST":
+        # Mock payment processing
+        reg.payment_status = "Paid"
+        reg.payment_id = request.POST.get("card_number")[-4:] + "-MOCK-" + os.urandom(4).hex()
+        reg.save()
+        messages.success(request, f"Payment successful! Fee: {reg.tournament.entry_fee}")
+        return redirect("/user_view_tournaments/")
+
+    return render(request, "USER/tournament_payment.html", {"reg": reg})
 
 
 

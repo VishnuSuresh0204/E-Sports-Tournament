@@ -37,13 +37,19 @@
 
             <!-- Tournament Info -->
             <div class="tournament-info-box mb-4 p-3 rounded">
-              <h5 class="text-info mb-2">
-                {{ tournament.name }}
-              </h5>
-              <p class="text-muted small mb-0">
-                <i class="fas fa-gamepad mr-1"></i>
-                {{ tournament.game.name }}
-              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="text-info mb-1">{{ tournament.name }}</h5>
+                  <p class="text-muted small mb-0">
+                    <i class="fas fa-gamepad mr-1"></i>
+                    {{ tournament.game.name }}
+                  </p>
+                </div>
+                <div class="text-right">
+                  <div class="text-warning small text-uppercase fw-bold">Entry Fee</div>
+                  <div class="h5 text-white mb-0">${{ tournament.entry_fee }}</div>
+                </div>
+              </div>
             </div>
 
             <form method="post" action="/user_register_tournament/">
@@ -87,12 +93,10 @@
                   <label class="text-muted small fw-bold text-uppercase">
                     Assign a Team
                   </label>
-                  <select name="team_id"
-                          class="form-control form_input_dark"
-                          required>
+                  <select name="team_id" class="form-control form_input_dark" required>
                     <option value="">-- Choose your squad --</option>
                     {% for t in teams %}
-                      <option value="{{ t.id }}">{{ t.name }}</option>
+                    <option value="{{ t.id }}">{{ t.name }}</option>
                     {% endfor %}
                   </select>
 
@@ -109,8 +113,7 @@
                   Confirm Registration
                 </button>
 
-                <a href="/user_view_tournaments/"
-                   class="d-block mt-3 text-muted small">
+                <a href="/user_view_tournaments/" class="d-block mt-3 text-muted small">
                   <i class="fas fa-arrow-left mr-1"></i>
                   Cancel and return
                 </a>
@@ -150,13 +153,13 @@
   .gaming-card {
     background: #0b0f17;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 30px rgba(255, 193, 7, 0.15);
   }
 
   .tournament-info-box {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .form_input_dark {

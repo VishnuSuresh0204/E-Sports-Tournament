@@ -70,6 +70,7 @@ urlpatterns = [
     path("user_register_tournament/", views.user_register_tournament),
     path("user_view_matches/", views.user_view_matches),
     path("user_view_registrations/", views.user_view_registrations),
+    path("tournament_payment/", views.tournament_payment),
 
 
     # Feedback

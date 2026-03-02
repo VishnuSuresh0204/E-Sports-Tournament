@@ -162,6 +162,8 @@ class TournamentRegistration(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
 
     status = models.CharField(max_length=20, default='Pending')
+    payment_status = models.CharField(max_length=20, default='Pending')  # Pending / Paid / Not Required
+    payment_id = models.CharField(max_length=100, blank=True, null=True)
     registered_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

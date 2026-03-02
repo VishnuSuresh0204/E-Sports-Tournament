@@ -33,6 +33,7 @@
                   <th class="px-4">Tournament</th>
                   <th>Game</th>
                   <th>Timeline</th>
+                  <th>Entry Fee</th>
                   <th>Status</th>
                   <th class="text-center">Actions</th>
                 </tr>
@@ -55,15 +56,19 @@
                     End: {{ t.end_date|date:"d M" }}
                   </td>
 
+                  <td class="text-warning fw-bold">
+                    {% if t.entry_fee > 0 %}${{ t.entry_fee }}{% else %}FREE{% endif %}
+                  </td>
+
                   <td>
                     {% if t.status == 'Upcoming' %}
-                      <span class="gaming-badge warning">Upcoming</span>
+                    <span class="gaming-badge warning">Upcoming</span>
                     {% elif t.status == 'Ongoing' %}
-                      <span class="gaming-badge info">Ongoing</span>
+                    <span class="gaming-badge info">Ongoing</span>
                     {% elif t.status == 'Completed' %}
-                      <span class="gaming-badge success">Completed</span>
+                    <span class="gaming-badge success">Completed</span>
                     {% else %}
-                      <span class="gaming-badge neutral">{{ t.status }}</span>
+                    <span class="gaming-badge neutral">{{ t.status }}</span>
                     {% endif %}
                   </td>
 
@@ -71,21 +76,18 @@
                     <div class="btn-group">
 
                       {% if t.status == 'Upcoming' or t.status == 'Ongoing' %}
-                      <a href="/user_register_tournament/?id={{ t.id }}"
-                         class="gaming-btn success">
+                      <a href="/user_register_tournament/?id={{ t.id }}" class="gaming-btn success">
                         Join
                       </a>
                       {% endif %}
 
-                      <a href="/user_view_matches/?tournament_id={{ t.id }}"
-                         class="gaming-btn info ml-2">
+                      <a href="/user_view_matches/?tournament_id={{ t.id }}" class="gaming-btn info ml-2">
                         Matches
                       </a>
 
                       {% if now > t.end_date %}
-                      <a href="/add_feedback/?tournament_id={{ t.id }}"
-                         class="gaming-btn neutral ml-2"
-                         title="Add Feedback">
+                      <a href="/add_feedback/?tournament_id={{ t.id }}" class="gaming-btn neutral ml-2"
+                        title="Add Feedback">
                         <i class="far fa-comment"></i>
                       </a>
                       {% endif %}
@@ -97,7 +99,7 @@
 
                 {% empty %}
                 <tr>
-                  <td colspan="5" class="text-center py-5">
+                  <td colspan="6" class="text-center py-5">
                     <div class="text-muted">
                       <i class="fas fa-layer-group fa-3x mb-3"></i>
                       <p>No active tournaments found.</p>
@@ -140,7 +142,7 @@
   .gaming-card {
     background: #0b0f17;
     border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 30px rgba(255, 193, 7, 0.15);
   }
 
@@ -156,7 +158,7 @@
   }
 
   .table-dark td {
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     vertical-align: middle;
   }
 
