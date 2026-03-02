@@ -38,7 +38,7 @@
               <!-- Team 1 -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team 1</label>
-                <select class="form-control gaming-input" name="team1" required>
+                <select class="form-control gaming-input" name="team1" size="5" required>
                   <option value="">Select Team 1</option>
                   {% for t in teams %}
                   <option value="{{ t.id }}">{{ t.name }}</option>
@@ -49,7 +49,7 @@
               <!-- Team 2 -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team 2</label>
-                <select class="form-control gaming-input" name="team2" required>
+                <select class="form-control gaming-input" name="team2" size="5" required>
                   <option value="">Select Team 2</option>
                   {% for t in teams %}
                   <option value="{{ t.id }}">{{ t.name }}</option>
@@ -93,6 +93,68 @@
   </div>
 </section>
 
-</section>
+<!-- PAGE-SPECIFIC GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .gaming-input:focus {
+    background: #05070c;
+    color: #fff;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  }
+
+  select.gaming-input {
+    height: auto;
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 35px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .gaming-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .gaming-btn-secondary {
+    background: transparent;
+    border: 1px solid #00ffff;
+    border-radius: 30px;
+    padding: 12px 35px;
+    font-weight: 700;
+    color: #00ffff;
+    text-transform: uppercase;
+  }
+
+  .gaming-btn-secondary:hover {
+    background: #00ffff;
+    color: #000;
+  }
+</style>
 
 {% endblock %}

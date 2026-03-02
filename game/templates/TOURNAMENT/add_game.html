@@ -15,9 +15,9 @@
     <!-- Page Title -->
     <div class="row mb-5">
       <div class="col-12 text-center">
-        <h2 class="gaming-title" style="font-size: 3rem; margin-bottom: 0.5rem;">Add Game</h2>
-        <p class="text-info text-uppercase fw-bold" style="letter-spacing: 4px; font-size: 0.8rem;">
-          Expand your arena's roster
+        <h2 class="gaming-title">Add Game</h2>
+        <p class="text-muted">
+          Add a new game to manage teams and tournaments
         </p>
       </div>
     </div>
@@ -26,53 +26,43 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
 
-        <div class="card glass-panel neon-border-azure p-4 p-md-5">
+        <div class="card gaming-card p-4 p-md-5">
 
-          <form action="/add_game/" method="post" id="addGameForm" novalidate>
+          <form class="form-contact contact_form" action="/add_game/" method="post" id="addGameForm" novalidate>
+
             {% csrf_token %}
 
             <div class="row">
 
               <!-- Game Name -->
-              <div class="col-md-8 mb-4">
-                <label class="form-label text-white small text-uppercase">Game Title</label>
-                <div class="input-icon-wrapper">
-                  <input class="form-control gaming-input" name="name" type="text" placeholder="e.g. Valorant, Dota 2"
-                    required>
-                  <i class="fas fa-gamepad"></i>
-                </div>
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Game Name</label>
+                <input class="form-control gaming-input" name="name" type="text" placeholder="Enter game name" required>
               </div>
 
               <!-- Team Size -->
-              <div class="col-md-4 mb-4">
-                <label class="form-label text-white small text-uppercase">Team Size</label>
-                <div class="input-icon-wrapper">
-                  <input class="form-control gaming-input" name="team_size" type="number" min="1" placeholder="5">
-                  <i class="fas fa-users"></i>
-                </div>
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Team Size</label>
+                <input class="form-control gaming-input" name="team_size" type="number" min="1" placeholder="Default 5">
               </div>
 
               <!-- Description -->
-              <div class="col-12 mb-5">
-                <label class="form-label text-white small text-uppercase">Game Meta / Description</label>
-                <div class="input-icon-wrapper">
-                  <textarea class="form-control gaming-input" name="description" rows="4"
-                    placeholder="Briefly describe the game and its competitive nature..."></textarea>
-                  <i class="fas fa-info-circle" style="top: 25px;"></i>
-                </div>
+              <div class="col-12 mb-4">
+                <label class="form-label text-white">Description</label>
+                <textarea class="form-control gaming-input" name="description" rows="4"
+                  placeholder="Enter game description"></textarea>
               </div>
 
             </div>
 
             <!-- Buttons -->
-            <div class="d-flex flex-column flex-md-row justify-content-center mt-2 gap-4">
-              <button type="submit" class="gaming-btn-premium px-5 py-3">
-                <i class="fas fa-plus-circle mr-2"></i> Register Game
+            <div class="d-flex flex-column flex-md-row justify-content-between mt-4 gap-3">
+              <button type="submit" class="btn gaming-btn flex-fill">
+                Add Game
               </button>
 
-              <a href="/tc_view_game/" class="btn btn-outline-info rounded-0 d-flex align-items-center px-5"
-                style="border-width: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">
-                Back to Roster
+              <a href="/tc_view_game/" class="btn gaming-btn-secondary flex-fill text-center">
+                Back to Game List
               </a>
             </div>
 
@@ -86,6 +76,68 @@
   </div>
 </section>
 
-</section>
+<!-- PAGE-SPECIFIC GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .gaming-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .gaming-input:focus {
+    background: #05070c;
+    color: #fff;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .gaming-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .gaming-btn-secondary {
+    background: transparent;
+    border: 1px solid #00ffff;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00ffff;
+  }
+
+  .gaming-btn-secondary:hover {
+    background: #00ffff;
+    color: #000;
+  }
+</style>
 
 {% endblock %}

@@ -34,7 +34,7 @@
               <!-- Tournament -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Select Tournament</label>
-                <select class="form-control gaming-input scroll-select" name="tournament" required>
+                <select class="form-control gaming-input scroll-select" name="tournament" size="5" required>
                   {% for t in tournaments %}
                   <option value="{{ t.id }}">
                     {{ t.name }} ({{ t.game.name }})
@@ -46,7 +46,7 @@
               <!-- Team 1 -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team 1</label>
-                <select class="form-control gaming-input scroll-select" name="team1" required>
+                <select class="form-control gaming-input scroll-select" name="team1" size="5" required>
                   {% for t in teams %}
                   <option value="{{ t.id }}">{{ t.name }}</option>
                   {% endfor %}
@@ -56,7 +56,7 @@
               <!-- Team 2 -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team 2</label>
-                <select class="form-control gaming-input scroll-select" name="team2" required>
+                <select class="form-control gaming-input scroll-select" name="team2" size="5" required>
                   {% for t in teams %}
                   <option value="{{ t.id }}">{{ t.name }}</option>
                   {% endfor %}
