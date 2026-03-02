@@ -1,0 +1,136 @@
+{% extends 'ADMIN/commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>alert("{{ m }}");</script>
+{% endfor %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb_iner text-center">
+          <div class="breadcrumb_iner_item">
+            <h2>Registrations – {{ tournament.name }}</h2>
+            {% comment %} <p class="text-white">Track your feedback and admin responses</p> {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Registrations Table -->
+<section class="contact-section section_padding">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Team / Player</th>
+                <th>Captain / Player</th>
+                <th>Status</th>
+                <th>Registered At</th>
+                <th style="width: 200px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in registrations %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+
+                <!-- Registration Type -->
+                <td>
+                  {% if r.team %}
+                  <span class="badge badge-info">Team</span>
+                  {% else %}
+                  <span class="badge badge-secondary">Individual</span>
+                  {% endif %}
+                </td>
+
+                <!-- Team or Player -->
+                <td>
+                  {% if r.team %}
+                  {{ r.team.name }}
+                  {% elif r.player %}
+                  {{ r.player.gamer_tag }} ({{ r.player.name }})
+                  {% else %}
+                  Unknown
+                  {% endif %}
+                </td>
+
+                <!-- Captain / Player -->
+                <td>
+                  {% if r.team %}
+                  {{ r.team.captain.gamer_tag }} ({{ r.team.captain.name }})
+                  {% elif r.player %}
+                  {{ r.player.gamer_tag }}
+                  {% else %}
+                  —
+                  {% endif %}
+                </td>
+
+                <!-- Status -->
+                <td>
+                  {% if r.status == "Approved" %}
+                  <span class="badge badge-success">Approved</span>
+                  {% elif r.status == "Rejected" %}
+                  <span class="badge badge-danger">Rejected</span>
+                  {% else %}
+                  <span class="badge badge-warning">Pending</span>
+                  {% endif %}
+                </td>
+
+                <!-- Registered At -->
+                <td>{{ r.registered_at|date:"d M Y H:i" }}</td>
+
+                <!-- Actions -->
+                <td>
+                  {% if r.status == "Pending" %}
+                  <a href="/update_registration_status/?id={{ r.id }}&status=Approved"
+                    class="btn btn-success btn-sm mb-1 d-block">
+                    Approve
+                  </a>
+                  <a href="/update_registration_status/?id={{ r.id }}&status=Rejected"
+                    class="btn btn-danger btn-sm d-block" onclick="return confirm('Reject this registration?');">
+                    Reject
+                  </a>
+                  {% else %}
+                  <span class="text-muted">No actions</span>
+                  {% endif %}
+                </td>
+              </tr>
+
+              {% empty %}
+              <tr>
+                <td colspan="7" class="text-center text-muted">
+                  No registrations found.
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-group mt-3">
+          <a href="/view_tournament/" class="btn btn-primary">
+            Back to Tournaments
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

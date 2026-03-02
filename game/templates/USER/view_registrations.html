@@ -1,0 +1,171 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE WRAPPER (NAVBAR SAFE OFFSET) -->
+<section class="section_padding py-5 user-page">
+
+  <!-- Page Header -->
+  <div class="container mb-5 text-center">
+    <h2 class="gaming-title">
+      <i class="fas fa-clipboard-check text-success mr-2"></i>
+      My Registrations
+    </h2>
+    <p class="text-muted mb-0">
+      Track your tournament enlistments and approval status
+    </p>
+  </div>
+
+  <!-- Content Section -->
+  <div class="container">
+    <div class="card gaming-card overflow-hidden">
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0 align-middle">
+
+          <thead class="gaming-thead">
+            <tr>
+              <th class="px-4">Tournament</th>
+              <th>Team</th>
+              <th>Registered On</th>
+              <th class="text-center">Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for r in registrations %}
+            <tr>
+
+              <!-- Tournament -->
+              <td class="px-4">
+                <div class="fw-bold text-info">{{ r.tournament.name }}</div>
+                <small class="text-muted">{{ r.tournament.game.name }}</small>
+              </td>
+
+              <!-- Team -->
+              <td>
+                <span class="text-white fw-bold">
+                  <i class="fas fa-users mr-2 text-info"></i>
+                  {{ r.team.name }}
+                </span>
+              </td>
+
+              <!-- Date -->
+              <td>
+                <span class="small text-muted">
+                  <i class="far fa-calendar-alt mr-1"></i>
+                  {{ r.registered_at|date:"d M Y" }}
+                </span>
+              </td>
+
+              <!-- Status -->
+              <td class="text-center">
+                {% if r.status == 'Pending' %}
+                  <span class="gaming-badge warning">Pending</span>
+                {% elif r.status == 'Approved' %}
+                  <span class="gaming-badge success">Approved</span>
+                {% elif r.status == 'Rejected' %}
+                  <span class="gaming-badge danger">Rejected</span>
+                {% else %}
+                  <span class="gaming-badge neutral">{{ r.status }}</span>
+                {% endif %}
+              </td>
+
+            </tr>
+
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center py-5">
+                <div class="text-muted">
+                  <i class="fas fa-clipboard-list fa-3x mb-3"></i>
+                  <p>Your deployment history is empty.</p>
+                  <a href="/user_view_tournaments/" class="btn btn-outline-success mt-3">
+                    Find Tournaments
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- GAMING UI STYLES -->
+<style>
+  /* NAVBAR OFFSET */
+  .user-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .user-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(40, 167, 69, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(40, 167, 69, 0.15);
+  }
+
+  .gaming-thead {
+    background: #05070c;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .table-dark {
+    background: transparent;
+  }
+
+  .table-dark td {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    vertical-align: middle;
+  }
+
+  .gaming-badge {
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .gaming-badge.warning {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #000;
+  }
+
+  .gaming-badge.success {
+    background: linear-gradient(135deg, #00ff99, #00cc66);
+    color: #000;
+  }
+
+  .gaming-badge.danger {
+    background: linear-gradient(135deg, #ff4d4d, #c82333);
+    color: #fff;
+  }
+
+  .gaming-badge.neutral {
+    background: #444;
+    color: #ccc;
+  }
+</style>
+
+{% endblock %}

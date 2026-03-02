@@ -1,0 +1,223 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE WRAPPER (NAVBAR SAFE OFFSET) -->
+<section class="section_padding py-5 user-page">
+
+  <!-- Page Header -->
+  <div class="container mb-5 text-center">
+    <h2 class="gaming-title">
+      <i class="fas fa-users text-info mr-2"></i>
+      Squad Outpost
+    </h2>
+    <p class="text-muted">
+      Analyzing the strength of {{ team.name }}
+    </p>
+  </div>
+
+  <!-- Team Header -->
+  <div class="container mb-5">
+    <div class="card gaming-card p-4 p-md-5">
+      <div class="row align-items-center">
+
+        <div class="col-md-9 text-center text-md-left">
+          <h1 class="text-white fw-bold mb-1">
+            {{ team.name }}
+          </h1>
+
+          <p class="text-info h5 mb-3">
+            <i class="fas fa-gamepad mr-2"></i>
+            {{ team.game.name|default:"General Gaming" }}
+          </p>
+
+          <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
+            <span class="gaming-badge warning mr-2 mb-2">
+              <i class="fas fa-crown mr-1"></i>
+              Captain: {{ team.captain.name }}
+            </span>
+
+            <span class="gaming-badge neutral mb-2">
+              <i class="fas fa-calendar-alt mr-1"></i>
+              Founded: {{ team.created_at|date:"M Y" }}
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-3 text-center text-md-right mt-4 mt-md-0">
+          {% if is_captain %}
+          <a href="/add_team_member/?team_id={{ team.id }}"
+             class="btn_1 btn-block py-3">
+            <i class="fas fa-user-plus mr-2"></i>
+            Add Teammate
+          </a>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Roster Section -->
+  <div class="container">
+
+    <h3 class="text-white mb-4">
+      Active Personnel ({{ members.count }})
+    </h3>
+
+    <div class="card gaming-card overflow-hidden">
+      <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0">
+
+          <thead class="gaming-thead">
+            <tr>
+              <th class="px-4 py-3">Member</th>
+              <th>Gamer Tag</th>
+              <th>Role</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for m in members %}
+            <tr>
+
+              <td class="px-4 py-3 fw-bold text-white">
+                {% if m.player %}
+                  {{ m.player.name }}
+                  {% if m.player.id == team.captain.id %}
+                    <i class="fas fa-crown text-warning ml-1"></i>
+                  {% endif %}
+                {% else %}
+                  {{ m.guest_name }}
+                  <span class="gaming-badge neutral small ml-2">Guest</span>
+                {% endif %}
+              </td>
+
+              <td class="text-info">
+                {{ m.player.gamer_tag|default:"-" }}
+              </td>
+
+              <td>
+                <span class="gaming-badge neutral">
+                  {{ m.role }}
+                </span>
+              </td>
+
+              <td class="text-center">
+                {% if is_captain %}
+                  {% if not m.player or m.player.id != team.captain.id %}
+                  <a href="/delete_team_member/?id={{ m.id }}"
+                     class="gaming-btn danger"
+                     onclick="return confirm('Dismiss this member?');">
+                    <i class="fas fa-times"></i>
+                  </a>
+                  {% else %}
+                  <span class="text-warning small">
+                    <i class="fas fa-shield-alt"></i> Founder
+                  </span>
+                  {% endif %}
+                {% else %}
+                  <span class="text-muted small">Enlisted</span>
+                {% endif %}
+              </td>
+
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center py-5 text-muted">
+                Your roster is currently empty.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/user_view_teams/" class="text-muted small">
+        <i class="fas fa-arrow-left mr-1"></i>
+        Return to Command Center
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- GAMING STYLES -->
+<style>
+  /* SAME GLOBAL FIX */
+  .user-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .user-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(23, 162, 184, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
+  }
+
+  .gaming-thead {
+    background: #05070c;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .gaming-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .gaming-badge.warning {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #000;
+  }
+
+  .gaming-badge.neutral {
+    background: #333;
+    color: #ccc;
+  }
+
+  .gaming-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+  }
+
+  .gaming-btn.danger {
+    color: #ff4d4d;
+    border-color: #ff4d4d;
+  }
+
+  .gaming-btn.danger:hover {
+    background: #ff4d4d;
+    color: #fff;
+  }
+</style>
+
+{% endblock %}

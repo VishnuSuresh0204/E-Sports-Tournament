@@ -1,0 +1,259 @@
+{% extends 'TOURNAMENT/commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+  alert("{{ m|escapejs }}");
+</script>
+{% endfor %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <!-- Page Title -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">Edit Tournament</h2>
+        <p class="text-muted">
+          Update tournament configuration and schedule
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-xl-8 col-lg-9">
+
+        <div class="card gaming-card p-4 p-md-5">
+
+          <!-- Header -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="text-white fw-bold mb-0">Tournament Information</h4>
+            <span class="badge gaming-badge">
+              {{ tournament.status }}
+            </span>
+          </div>
+
+          <form action="/edit_tournament/?id={{ tournament.id }}" method="post">
+            {% csrf_token %}
+
+            <!-- Tournament Name -->
+            <div class="mb-4">
+              <label class="form-label text-white">Tournament Name</label>
+              <input type="text"
+                     class="form-control gaming-input"
+                     name="name"
+                     value="{{ tournament.name }}"
+                     required>
+            </div>
+
+            <!-- Game -->
+            <div class="mb-4">
+              <label class="form-label text-white">Game</label>
+              <input type="text"
+                     class="form-control gaming-input"
+                     value="{{ tournament.game.name }}"
+                     disabled>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <label class="form-label text-white">Description</label>
+              <textarea class="form-control gaming-input"
+                        name="description"
+                        rows="4">{{ tournament.description }}</textarea>
+            </div>
+
+            <!-- Status -->
+            <div class="mb-4">
+              <label class="form-label text-white">Tournament Status</label>
+              <select class="form-control gaming-input" name="status">
+                <option value="Upcoming" {% if tournament.status == "Upcoming" %}selected{% endif %}>Upcoming</option>
+                <option value="Ongoing" {% if tournament.status == "Ongoing" %}selected{% endif %}>Ongoing</option>
+                <option value="Completed" {% if tournament.status == "Completed" %}selected{% endif %}>Completed</option>
+              </select>
+            </div>
+
+            <hr class="gaming-divider">
+
+            <!-- Dates -->
+            <h5 class="text-white fw-bold mb-3">Schedule</h5>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Start Date</label>
+                <input class="form-control gaming-input"
+                       type="datetime-local"
+                       name="start_date"
+                       value="{{ tournament.start_date|date:'Y-m-d\\TH:i' }}">
+              </div>
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">End Date</label>
+                <input class="form-control gaming-input"
+                       type="datetime-local"
+                       name="end_date"
+                       value="{{ tournament.end_date|date:'Y-m-d\\TH:i' }}">
+              </div>
+            </div>
+
+            <!-- Registration -->
+            <h5 class="text-white fw-bold mb-3 mt-4">Registration Period</h5>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Registration Opens</label>
+                <input class="form-control gaming-input"
+                       type="datetime-local"
+                       name="registration_open_at"
+                       value="{{ tournament.registration_open_at|date:'Y-m-d\\TH:i' }}">
+              </div>
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Registration Closes</label>
+                <input class="form-control gaming-input"
+                       type="datetime-local"
+                       name="registration_close_at"
+                       value="{{ tournament.registration_close_at|date:'Y-m-d\\TH:i' }}">
+              </div>
+            </div>
+
+            <!-- Limits -->
+            <h5 class="text-white fw-bold mb-3 mt-4">Tournament Limits</h5>
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <input class="form-control gaming-input"
+                       type="number"
+                       name="max_teams"
+                       value="{{ tournament.max_teams }}"
+                       placeholder="Max Teams">
+              </div>
+              <div class="col-md-4 mb-4">
+                <input class="form-control gaming-input"
+                       type="number"
+                       step="0.01"
+                       name="entry_fee"
+                       value="{{ tournament.entry_fee }}"
+                       placeholder="Entry Fee">
+              </div>
+              <div class="col-md-4 mb-4">
+                <input class="form-control gaming-input"
+                       type="number"
+                       step="0.01"
+                       name="prize_pool"
+                       value="{{ tournament.prize_pool }}"
+                       placeholder="Prize Pool">
+              </div>
+            </div>
+
+            <!-- Mode -->
+            <h5 class="text-white fw-bold mb-3 mt-4">Mode</h5>
+            <div class="form-check mb-3">
+              <input class="form-check-input"
+                     type="checkbox"
+                     name="is_online"
+                     id="is_online"
+                     {% if tournament.is_online %}checked{% endif %}>
+              <label class="form-check-label text-white" for="is_online">
+                Online Tournament
+              </label>
+            </div>
+
+            <input class="form-control gaming-input mb-4"
+                   name="location"
+                   value="{{ tournament.location }}"
+                   placeholder="Location (offline only)">
+
+            <!-- Buttons -->
+            <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mt-5">
+              <button class="btn gaming-btn flex-fill">
+                💾 Update Tournament
+              </button>
+
+              <a href="/tc_view_tournament/"
+                 class="btn gaming-btn-secondary flex-fill text-center">
+                ← Back
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 35px rgba(0, 255, 255, 0.18);
+  }
+
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .gaming-input:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    background: #05070c;
+    color: #fff;
+  }
+
+  .gaming-divider {
+    border-color: rgba(255, 255, 255, 0.15);
+    margin: 2rem 0;
+  }
+
+  .gaming-badge {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .gaming-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .gaming-btn-secondary {
+    background: transparent;
+    border: 1px solid #00ffff;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00ffff;
+  }
+
+  .gaming-btn-secondary:hover {
+    background: #00ffff;
+    color: #000;
+  }
+</style>
+
+{% endblock %}

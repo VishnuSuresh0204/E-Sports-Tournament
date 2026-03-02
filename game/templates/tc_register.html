@@ -1,0 +1,168 @@
+{% extends 'commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="contact-title gaming-title">
+          Tournament Constructor Registration
+        </h2>
+        <p class="text-muted">
+          Step into the arena as an official tournament architect
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="card gaming-card p-4 p-md-5">
+
+          <form action="/register_tc/"
+                method="post"
+                enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="row">
+
+              <!-- Full Name -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control gaming-input"
+                  required
+                  minlength="3"
+                  pattern="[A-Za-z ]+"
+                  title="Only letters and spaces allowed (min 3 characters)">
+              </div>
+
+              <!-- Username -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  class="form-control gaming-input"
+                  required
+                  minlength="4"
+                  pattern="[a-zA-Z0-9_]+"
+                  title="Minimum 4 characters. Letters, numbers, underscore only">
+              </div>
+
+              <!-- Email -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control gaming-input"
+                  required>
+              </div>
+
+              <!-- Phone -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Phone Number</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  class="form-control gaming-input"
+                  required
+                  pattern="[0-9]{10}"
+                  maxlength="10"
+                  title="Enter a valid 10-digit phone number">
+              </div>
+
+              <!-- Password -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control gaming-input"
+                  required
+                  minlength="6"
+                  title="Password must be at least 6 characters">
+              </div>
+
+              <!-- Profile Picture -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Profile Picture</label>
+                <input
+                  type="file"
+                  name="profile_pic"
+                  class="form-control gaming-input"
+                  accept="image/*">
+              </div>
+
+            </div>
+
+            <div class="text-center mt-4">
+              <button type="submit" class="btn gaming-btn px-5">
+                Register as Constructor
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE-SPECIFIC GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .gaming-input:focus {
+    background: #05070c;
+    color: #fff;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+
+  .gaming-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+</style>
+
+{% endblock %}

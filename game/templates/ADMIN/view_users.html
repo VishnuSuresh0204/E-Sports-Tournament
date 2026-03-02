@@ -1,0 +1,134 @@
+{% extends 'ADMIN/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <!-- Page Title -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">User Management</h2>
+        <p class="text-muted">All registered gamers on the platform</p>
+      </div>
+    </div>
+
+    <!-- User Table -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card gaming-card border-0 overflow-hidden">
+
+          <div class="card-header bg-transparent p-4 border-bottom">
+            <h4 class="text-white mb-0">
+              <i class="fas fa-users mr-2"></i> Registered Gamers
+            </h4>
+          </div>
+
+          <div class="card-body p-0">
+            <div class="table-responsive">
+
+              <table class="table table-hover mb-0 align-middle gaming-table">
+                <thead>
+                  <tr>
+                    <th class="px-4">#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Gamer Tag</th>
+                    <th>Game</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for u in users %}
+                  <tr>
+                    <td class="px-4 text-muted">{{ forloop.counter }}</td>
+                    <td class="fw-bold text-white">{{ u.name }}</td>
+                    <td>
+                      <a href="mailto:{{ u.email }}" class="text-info">
+                        {{ u.email }}
+                      </a>
+                    </td>
+                    <td class="text-white">{{ u.phone }}</td>
+                    <td>
+                      <span class="badge gaming-badge">
+                        {{ u.gamer_tag }}
+                      </span>
+                    </td>
+                    <td class="text-white">
+                      {{ u.game.name|default:"—" }}
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="6" class="text-center py-5">
+                      <div class="text-muted">
+                        <i class="fas fa-user-slash fa-3x mb-3"></i>
+                        <p>No gamers found in the system.</p>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE-SPECIFIC GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-table thead {
+    background: rgba(0, 255, 255, 0.08);
+  }
+
+  .gaming-table th {
+    color: #00ffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  .gaming-table td {
+    padding: 1rem 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gaming-table tbody tr:hover {
+    background: rgba(0, 255, 255, 0.05);
+  }
+
+  .gaming-badge {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 12px;
+  }
+</style>
+
+{% endblock %}

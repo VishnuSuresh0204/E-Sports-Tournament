@@ -1,0 +1,181 @@
+{% extends 'TOURNAMENT/commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+  alert("{{ m|escapejs }}");
+</script>
+{% endfor %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <!-- Page Title -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">Edit Game</h2>
+        <p class="text-muted">Modify game settings and availability</p>
+      </div>
+    </div>
+
+    <!-- Edit Game Form -->
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="card gaming-card p-4 p-md-5">
+
+          <h4 class="text-white mb-4">Game Details</h4>
+
+          <form class="form-contact contact_form"
+                action="/edit_game/?id={{ game.id }}"
+                method="post"
+                novalidate>
+
+            {% csrf_token %}
+
+            <div class="row">
+
+              <!-- Game Name -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Game Name</label>
+                <input class="form-control gaming-input"
+                       name="name"
+                       type="text"
+                       value="{{ game.name }}"
+                       required>
+              </div>
+
+              <!-- Team Size -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Team Size</label>
+                <input class="form-control gaming-input"
+                       name="team_size"
+                       type="number"
+                       value="{{ game.team_size }}">
+              </div>
+
+              <!-- Description -->
+              <div class="col-12 mb-4">
+                <label class="form-label text-white">Description</label>
+                <textarea class="form-control gaming-input"
+                          name="description"
+                          rows="4">{{ game.description }}</textarea>
+              </div>
+
+              <!-- Status -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Game Status</label>
+                <div class="d-flex gap-4 mt-2">
+
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="status"
+                           value="1"
+                           {% if game.status == 1 %}checked{% endif %}>
+                    <label class="form-check-label text-white">
+                      Active
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="status"
+                           value="0"
+                           {% if game.status == 0 %}checked{% endif %}>
+                    <label class="form-check-label text-white">
+                      Inactive
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mt-4">
+              <button type="submit" class="btn gaming-btn flex-fill">
+                Update Game
+              </button>
+
+              <a href="/tc_view_game/"
+                 class="btn gaming-btn-secondary flex-fill text-center">
+                Back to Games
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .gaming-input:focus {
+    background: #05070c;
+    color: #fff;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .gaming-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .gaming-btn-secondary {
+    background: transparent;
+    border: 1px solid #00ffff;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00ffff;
+  }
+
+  .gaming-btn-secondary:hover {
+    background: #00ffff;
+    color: #000;
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends 'ADMIN/commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+  alert("{{ m|escapejs }}");
+</script>
+{% endfor %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <!-- Page Title -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">
+          Update Match Result
+        </h2>
+        <p class="text-muted">
+          {{ match.tournament.name }} <br>
+          <strong>{{ match.team1.name }}</strong> vs <strong>{{ match.team2.name }}</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Update Form -->
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="card gaming-card p-4 p-md-5">
+
+          <form class="form-contact contact_form"
+                action="/update_match_result/?id={{ match.id }}"
+                method="post"
+                novalidate="novalidate">
+
+            {% csrf_token %}
+
+            <div class="row">
+
+              <!-- Team 1 Score -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">
+                  {{ match.team1.name }} Score
+                </label>
+                <input
+                  class="form-control gaming-input"
+                  name="team1_score"
+                  type="number"
+                  min="0"
+                  value="{{ match.team1_score }}">
+              </div>
+
+              <!-- Team 2 Score -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">
+                  {{ match.team2.name }} Score
+                </label>
+                <input
+                  class="form-control gaming-input"
+                  name="team2_score"
+                  type="number"
+                  min="0"
+                  value="{{ match.team2_score }}">
+              </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+              <button type="submit" class="btn gaming-btn">
+                Save Result
+              </button>
+
+              <a href="/view_matches/?tournament_id={{ match.tournament.id }}"
+                 class="btn gaming-btn-secondary">
+                Back
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE-SPECIFIC GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .gaming-input:focus {
+    background: #05070c;
+    color: #fff;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 35px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .gaming-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .gaming-btn-secondary {
+    background: transparent;
+    border: 1px solid #00ffff;
+    border-radius: 30px;
+    padding: 12px 35px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00ffff;
+  }
+
+  .gaming-btn-secondary:hover {
+    background: #00ffff;
+    color: #000;
+  }
+</style>
+
+{% endblock %}

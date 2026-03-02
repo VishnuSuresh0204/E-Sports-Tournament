@@ -1,0 +1,214 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE WRAPPER (NAVBAR OFFSET FIX) -->
+<section class="section_padding py-5 user-page">
+
+  <!-- Page Header -->
+  <div class="container mb-5">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="gaming-title">
+          <i class="fas fa-trophy text-warning mr-2"></i>
+          Tournaments
+        </h2>
+        <p class="text-muted mb-0">Browse and participate in tournaments</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card gaming-card overflow-hidden">
+          <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0 align-middle">
+
+              <thead class="gaming-thead">
+                <tr>
+                  <th class="px-4">Tournament</th>
+                  <th>Game</th>
+                  <th>Timeline</th>
+                  <th>Status</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for t in tournaments %}
+                <tr>
+
+                  <td class="px-4">
+                    <div class="fw-bold text-info">{{ t.name }}</div>
+                  </td>
+
+                  <td class="text-white small fw-bold">
+                    <i class="fas fa-gamepad mr-1"></i> {{ t.game.name }}
+                  </td>
+
+                  <td class="small text-muted">
+                    Start: {{ t.start_date|date:"d M" }}<br>
+                    End: {{ t.end_date|date:"d M" }}
+                  </td>
+
+                  <td>
+                    {% if t.status == 'Upcoming' %}
+                      <span class="gaming-badge warning">Upcoming</span>
+                    {% elif t.status == 'Ongoing' %}
+                      <span class="gaming-badge info">Ongoing</span>
+                    {% elif t.status == 'Completed' %}
+                      <span class="gaming-badge success">Completed</span>
+                    {% else %}
+                      <span class="gaming-badge neutral">{{ t.status }}</span>
+                    {% endif %}
+                  </td>
+
+                  <td class="text-center">
+                    <div class="btn-group">
+
+                      {% if t.status == 'Upcoming' or t.status == 'Ongoing' %}
+                      <a href="/user_register_tournament/?id={{ t.id }}"
+                         class="gaming-btn success">
+                        Join
+                      </a>
+                      {% endif %}
+
+                      <a href="/user_view_matches/?tournament_id={{ t.id }}"
+                         class="gaming-btn info ml-2">
+                        Matches
+                      </a>
+
+                      {% if now > t.end_date %}
+                      <a href="/add_feedback/?tournament_id={{ t.id }}"
+                         class="gaming-btn neutral ml-2"
+                         title="Add Feedback">
+                        <i class="far fa-comment"></i>
+                      </a>
+                      {% endif %}
+
+                    </div>
+                  </td>
+
+                </tr>
+
+                {% empty %}
+                <tr>
+                  <td colspan="5" class="text-center py-5">
+                    <div class="text-muted">
+                      <i class="fas fa-layer-group fa-3x mb-3"></i>
+                      <p>No active tournaments found.</p>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- STYLES -->
+<style>
+  /* 🔥 SAME FIX AS OTHER USER PAGES */
+  .user-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .user-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(255, 193, 7, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(255, 193, 7, 0.15);
+  }
+
+  .gaming-thead {
+    background: #05070c;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .table-dark {
+    background: transparent;
+  }
+
+  .table-dark td {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    vertical-align: middle;
+  }
+
+  .gaming-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .gaming-badge.warning {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #000;
+  }
+
+  .gaming-badge.info {
+    background: linear-gradient(135deg, #17a2b8, #0dcaf0);
+    color: #000;
+  }
+
+  .gaming-badge.success {
+    background: linear-gradient(135deg, #00ff99, #00cc66);
+    color: #000;
+  }
+
+  .gaming-badge.neutral {
+    background: #444;
+    color: #ccc;
+  }
+
+  .gaming-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 12px;
+    border: 1px solid transparent;
+  }
+
+  .gaming-btn.success {
+    background: #00cc66;
+    color: #000;
+  }
+
+  .gaming-btn.info {
+    background: #0dcaf0;
+    color: #000;
+  }
+
+  .gaming-btn.neutral {
+    background: #333;
+    color: #ccc;
+  }
+</style>
+
+{% endblock %}

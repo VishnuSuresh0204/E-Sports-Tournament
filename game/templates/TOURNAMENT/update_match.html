@@ -1,0 +1,161 @@
+{% extends 'TOURNAMENT/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <!-- Page Title -->
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">Update Match Result</h2>
+        <p class="text-muted">
+          {{ match.team1.name }} vs {{ match.team2.name }} · {{ match.tournament.name }}
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+
+        <div class="card gaming-card p-4">
+
+          <!-- Match Heading -->
+          <h4 class="text-white mb-4 text-center">
+            {{ match.team1.name }}
+            <span class="text-info mx-2">VS</span>
+            {{ match.team2.name }}
+          </h4>
+
+          <form action="/update_match_result/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="match_id" value="{{ match.id }}">
+
+            <!-- Scores -->
+            <div class="row mb-4">
+              <div class="col-6">
+                <label class="form-label text-white">
+                  {{ match.team1.name }} Score
+                </label>
+                <input type="number"
+                       name="team1_score"
+                       class="form-control gaming-input text-center"
+                       value="{{ match.team1_score }}"
+                       min="0"
+                       required>
+              </div>
+
+              <div class="col-6">
+                <label class="form-label text-white">
+                  {{ match.team2.name }} Score
+                </label>
+                <input type="number"
+                       name="team2_score"
+                       class="form-control gaming-input text-center"
+                       value="{{ match.team2_score }}"
+                       min="0"
+                       required>
+              </div>
+            </div>
+
+            <!-- Winner Selection -->
+            <div class="mb-4">
+              <label class="form-label text-white d-block mb-2">
+                Select Winning Team
+              </label>
+
+              <div class="form-check mb-2">
+                <input class="form-check-input"
+                       type="radio"
+                       name="winner"
+                       id="winner_team1"
+                       value="{{ match.team1.id }}"
+                       {% if match.winner == match.team1 %}checked{% endif %}
+                       required>
+                <label class="form-check-label text-white" for="winner_team1">
+                  {{ match.team1.name }}
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input"
+                       type="radio"
+                       name="winner"
+                       id="winner_team2"
+                       value="{{ match.team2.id }}"
+                       {% if match.winner == match.team2 %}checked{% endif %}>
+                <label class="form-check-label text-white" for="winner_team2">
+                  {{ match.team2.name }}
+                </label>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-3">
+              <button type="submit" class="btn gaming-btn w-100">
+                Save Result
+              </button>
+
+              <a href="/tc_view_matches/"
+                 class="btn gaming-btn-secondary w-100 text-center">
+                Back
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Styles -->
+<style>
+  .gaming-title {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+  }
+
+  .gaming-input:focus {
+    border-color: #00c6ff;
+    box-shadow: none;
+  }
+
+  .form-check-input {
+    cursor: pointer;
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border-radius: 25px;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+  }
+
+  .gaming-btn-secondary {
+    border: 1px solid #00c6ff;
+    border-radius: 25px;
+    color: #00c6ff;
+    background: transparent;
+  }
+</style>
+
+{% endblock %}

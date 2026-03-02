@@ -1,0 +1,180 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE WRAPPER (NAVBAR SAFE OFFSET) -->
+<section class="section_padding py-5 user-page">
+
+  <!-- Page Header -->
+  <div class="container mb-5 text-center">
+    <h2 class="gaming-title">
+      <i class="fas fa-users-cog text-info mr-2"></i>
+      Team Requests
+    </h2>
+    <p class="text-muted mb-0">
+      Track your squad foundation requests and their approval status
+    </p>
+  </div>
+
+  <!-- Content Section -->
+  <div class="container">
+    <div class="card gaming-card overflow-hidden">
+
+      <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0 align-middle">
+
+          <thead class="gaming-thead">
+            <tr>
+              <th class="px-4">Proposed Legion</th>
+              <th>Requested On</th>
+              <th>Status</th>
+              <th class="text-center">Outcome</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for r in requests %}
+            <tr>
+
+              <!-- Team Name -->
+              <td class="px-4">
+                <div class="fw-bold text-info">{{ r.team_name }}</div>
+                <small class="text-muted">Ref #{{ r.id|stringformat:"04d" }}</small>
+              </td>
+
+              <!-- Date -->
+              <td>
+                <span class="small text-muted">
+                  <i class="far fa-calendar-alt mr-1"></i>
+                  {{ r.created_at|date:"d M Y" }}
+                </span>
+              </td>
+
+              <!-- Status -->
+              <td>
+                {% if r.status == 'Pending' %}
+                  <span class="gaming-badge warning">Pending</span>
+                {% elif r.status == 'Approved' %}
+                  <span class="gaming-badge success">Approved</span>
+                {% elif r.status == 'Rejected' %}
+                  <span class="gaming-badge danger">Rejected</span>
+                {% else %}
+                  <span class="gaming-badge neutral">{{ r.status }}</span>
+                {% endif %}
+              </td>
+
+              <!-- Outcome -->
+              <td class="text-center">
+                {% if r.created_team %}
+                  <a href="/team_detail/?id={{ r.created_team.id }}"
+                     class="btn btn-sm btn-outline-info rounded-pill px-3">
+                    <i class="fas fa-external-link-alt mr-1"></i>
+                    View Squad
+                  </a>
+                {% elif r.status == 'Rejected' %}
+                  <span class="text-danger small">
+                    <i class="fas fa-times-circle mr-1"></i> Discharged
+                  </span>
+                {% else %}
+                  <span class="text-muted small">Under Review</span>
+                {% endif %}
+              </td>
+
+            </tr>
+
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center py-5">
+                <div class="text-muted">
+                  <i class="fas fa-history fa-3x mb-3"></i>
+                  <p>No previous team requests found.</p>
+                  <a href="/user_team_request/" class="btn btn-outline-info mt-3">
+                    Create New Team Request
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- GAMING UI STYLES -->
+<style>
+  /* NAVBAR OFFSET */
+  .user-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .user-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(23, 162, 184, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
+  }
+
+  .gaming-thead {
+    background: #05070c;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .table-dark {
+    background: transparent;
+  }
+
+  .table-dark td {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    vertical-align: middle;
+  }
+
+  .gaming-badge {
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .gaming-badge.warning {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #000;
+  }
+
+  .gaming-badge.success {
+    background: linear-gradient(135deg, #00ff99, #00cc66);
+    color: #000;
+  }
+
+  .gaming-badge.danger {
+    background: linear-gradient(135deg, #ff4d4d, #c82333);
+    color: #fff;
+  }
+
+  .gaming-badge.neutral {
+    background: #444;
+    color: #ccc;
+  }
+</style>
+
+{% endblock %}

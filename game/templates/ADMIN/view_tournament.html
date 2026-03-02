@@ -1,0 +1,191 @@
+{% extends 'ADMIN/commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+  alert("{{ m|escapejs }}");
+</script>
+{% endfor %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <!-- Page Title -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">Tournament Oversight</h2>
+        <p class="text-muted">Monitor all tournaments across the platform</p>
+      </div>
+    </div>
+
+    <!-- Tournament Table -->
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card gaming-card border-0 overflow-hidden">
+
+          <div class="card-header bg-transparent p-4 border-bottom">
+            <h4 class="text-white mb-0">
+              <i class="fas fa-trophy mr-2 text-warning"></i>
+              Global Tournaments
+            </h4>
+          </div>
+
+          <div class="card-body p-0">
+            <div class="table-responsive">
+
+              <table class="table table-hover mb-0 align-middle gaming-table">
+                <thead>
+                  <tr>
+                    <th class="px-4">#</th>
+                    <th>Tournament</th>
+                    <th>Game</th>
+                    <th>Constructor</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for t in tournaments %}
+                  <tr>
+                    <td class="px-4 text-muted">{{ forloop.counter }}</td>
+
+                    <td>
+                      <div class="fw-bold text-white">
+                        {{ t.name }}
+                      </div>
+                      <small class="text-muted">
+                        Type: {{ t.tournament_type|default:"Public" }}
+                      </small>
+                    </td>
+
+                    <td>
+                      <span class="text-info fw-bold">
+                        {{ t.game.name }}
+                      </span>
+                    </td>
+
+                    <td class="text-white">
+                      <i class="fas fa-user-tie small mr-1 text-secondary"></i>
+                      {{ t.created_by.username|default:"—" }}
+                    </td>
+
+                    <td>
+                      <div class="small">
+                        <span class="text-success">
+                          <i class="far fa-calendar-check mr-1"></i>
+                          {{ t.start_date|date:"d M Y" }}
+                        </span><br>
+                        <span class="text-danger">
+                          <i class="far fa-calendar-times mr-1"></i>
+                          {{ t.end_date|date:"d M Y" }}
+                        </span>
+                      </div>
+                    </td>
+
+                    <td>
+                      <span class="status-badge 
+                        {% if t.status == 'Upcoming' %}status-upcoming
+                        {% elif t.status == 'Ongoing' %}status-ongoing
+                        {% elif t.status == 'Completed' %}status-completed
+                        {% else %}status-other{% endif %}">
+                        {{ t.status }}
+                      </span>
+                    </td>
+                  </tr>
+
+                  {% empty %}
+                  <tr>
+                    <td colspan="6" class="text-center py-5">
+                      <div class="text-muted">
+                        <i class="fas fa-folder-open fa-3x mb-3"></i>
+                        <p>No tournaments have been registered yet.</p>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE-SPECIFIC GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-table thead {
+    background: rgba(0, 255, 255, 0.08);
+  }
+
+  .gaming-table th {
+    color: #00ffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  .gaming-table td {
+    padding: 1.25rem 1rem;
+    vertical-align: middle;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gaming-table tbody tr:hover {
+    background: rgba(0, 255, 255, 0.05);
+  }
+
+  .status-badge {
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .status-upcoming {
+    background: #ffc107;
+    color: #000;
+  }
+
+  .status-ongoing {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+  }
+
+  .status-completed {
+    background: #28a745;
+    color: #fff;
+  }
+
+  .status-other {
+    background: #6c757d;
+    color: #fff;
+  }
+</style>
+
+{% endblock %}

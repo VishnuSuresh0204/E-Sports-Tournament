@@ -1,0 +1,157 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- GAMING HERO (NO IMAGE) -->
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Gamer Command Center</h2>
+                        <p class="text-muted mt-2">Lead • Compete • Dominate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS GRID -->
+<section class="py-5" style="margin-top: -60px;">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark border-0 shadow text-center p-4 h-100">
+                    <div class="icon-box mb-3">
+                        <i class="fas fa-shield-alt fa-3x text-info"></i>
+                    </div>
+                    <h2 class="text-white fw-bold mb-0">{{ team_count }}</h2>
+                    <p class="text-muted text-uppercase small">Squads Led</p>
+                    <hr class="bg-secondary">
+                    <a href="/user_view_teams/" class="text-info small">
+                        Manage Teams <i class="fas fa-chevron-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark border-0 shadow text-center p-4 h-100">
+                    <div class="icon-box mb-3">
+                        <i class="fas fa-file-signature fa-3x text-success"></i>
+                    </div>
+                    <h2 class="text-white fw-bold mb-0">{{ registration_count }}</h2>
+                    <p class="text-muted text-uppercase small">Active Enlistments</p>
+                    <hr class="bg-secondary">
+                    <a href="/user_view_registrations/" class="text-success small">
+                        View Status <i class="fas fa-chevron-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark border-0 shadow text-center p-4 h-100">
+                    <div class="icon-box mb-3">
+                        <i class="fas fa-swords fa-3x text-danger"></i>
+                    </div>
+                    <h2 class="text-white fw-bold mb-0">{{ match_count }}</h2>
+                    <p class="text-muted text-uppercase small">Total Encounters</p>
+                    <hr class="bg-secondary">
+                    <a href="/user_view_matches/" class="text-danger small">
+                        Battle History <i class="fas fa-chevron-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- QUICK ACTIONS -->
+<section class="padding_bottom">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section_tittle text-center mb-5">
+                    <h2 class="text-white">Strategic Operations</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-dark border-0 p-4 h-100 d-flex flex-row align-items-center">
+                    <div class="mr-4">
+                        <div class="bg-primary rounded-circle p-4">
+                            <i class="fas fa-trophy fa-2x text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-white">Join Tournament</h4>
+                        <p class="text-muted small">Browse and enlist in live competitions</p>
+                        <a href="/user_view_tournaments/"
+                           class="btn btn-primary btn-sm rounded-pill px-4 mt-2">
+                            Browse Events
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card bg-dark border-0 p-4 h-100 d-flex flex-row align-items-center">
+                    <div class="mr-4">
+                        <div class="bg-info rounded-circle p-4">
+                            <i class="fas fa-users fa-2x text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-white">Request Team</h4>
+                        <p class="text-muted small">Create and register your official squad</p>
+                        <a href="/user_team_request/"
+                           class="btn btn-info btn-sm rounded-pill px-4 mt-2">
+                            Request Team
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- GAMING STYLE -->
+<style>
+    .breadcrumb_bg {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        padding: 120px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .breadcrumb_iner_item h2 {
+        font-weight: 800;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+    }
+
+    .card {
+        border-radius: 18px;
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+    }
+
+    h2, h4 {
+        font-weight: 700;
+    }
+</style>
+
+{% endblock %}

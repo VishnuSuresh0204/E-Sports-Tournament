@@ -1,0 +1,255 @@
+{% extends 'TOURNAMENT/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE CONTENT -->
+<section class="section_padding py-5 team-requests-page">
+  <div class="container">
+
+    <!-- Page Header -->
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <h2 class="gaming-title">
+          <i class="fas fa-users-cog mr-2 text-info"></i>
+          Team Requests
+        </h2>
+        <p class="text-muted mb-0">Approve or reject squad formation requests</p>
+      </div>
+    </div>
+
+    <!-- Requests Table -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card gaming-card overflow-hidden">
+
+          <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0 align-middle">
+
+              <thead class="gaming-thead">
+                <tr>
+                  <th class="px-4">Proposed Squad</th>
+                  <th>Requester</th>
+                  <th>Manifesto / Reason</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for r in requests %}
+                <tr>
+
+                  <!-- Team -->
+                  <td class="px-4">
+                    <div class="d-flex align-items-center">
+                      <div class="team-avatar mr-3">
+                        {% if r.logo %}
+                          <img src="{{ r.logo.url }}">
+                        {% else %}
+                          <i class="fas fa-shield-alt text-muted"></i>
+                        {% endif %}
+                      </div>
+                      <div>
+                        <div class="fw-bold text-info">{{ r.team_name }}</div>
+                        <small class="text-muted">{{ r.created_at|date:"d M Y" }}</small>
+                      </div>
+                    </div>
+                  </td>
+
+                  <!-- Requester -->
+                  <td>
+                    <div class="fw-bold text-white small">
+                      {{ r.requested_by.gamer_tag }}
+                    </div>
+                    <small class="text-muted">{{ r.requested_by.name }}</small>
+                  </td>
+
+                  <!-- Reason -->
+                  <td>
+                    <div class="text-muted small reason-box">
+                      {{ r.reason|truncatewords:20 }}
+                    </div>
+                  </td>
+
+                  <!-- Status -->
+                  <td class="text-center">
+                    {% if r.status == 'Pending' %}
+                      <span class="gaming-badge warning">Pending</span>
+                    {% elif r.status == 'Approved' %}
+                      <span class="gaming-badge success">Approved</span>
+                    {% elif r.status == 'Rejected' %}
+                      <span class="gaming-badge danger">Rejected</span>
+                    {% else %}
+                      <span class="gaming-badge neutral">{{ r.status }}</span>
+                    {% endif %}
+                  </td>
+
+                  <!-- Actions -->
+                  <td class="text-center">
+                    {% if r.status == "Pending" %}
+                    <div class="btn-group">
+                      <a href="/tc_approve_team_request/?id={{ r.id }}"
+                         class="gaming-btn success">
+                        <i class="fas fa-check"></i>
+                      </a>
+                      <a href="/tc_reject_team_request/?id={{ r.id }}"
+                         class="gaming-btn danger ml-2">
+                        <i class="fas fa-times"></i>
+                      </a>
+                    </div>
+                    {% else %}
+                      <small class="text-muted">Processed</small>
+                    {% endif %}
+                  </td>
+
+                </tr>
+
+                {% empty %}
+                <tr>
+                  <td colspan="5" class="text-center py-5">
+                    <div class="text-muted">
+                      <i class="fas fa-inbox fa-3x mb-3"></i>
+                      <p>No team requests pending.</p>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FIX + GAMING STYLES -->
+<style>
+  /* 🔥 FIX NAVBAR OVERLAP */
+  .team-requests-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .team-requests-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(23, 162, 184, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
+  }
+
+  .gaming-thead {
+    background: #05070c;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .table-dark {
+    background: transparent;
+  }
+
+  .table-dark td {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    vertical-align: middle;
+  }
+
+  .team-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #222;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .team-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .reason-box {
+    max-width: 320px;
+    white-space: pre-wrap;
+  }
+
+  .gaming-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .gaming-badge.warning {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #000;
+  }
+
+  .gaming-badge.success {
+    background: linear-gradient(135deg, #00ff99, #00cc66);
+    color: #000;
+  }
+
+  .gaming-badge.danger {
+    background: linear-gradient(135deg, #ff4d4d, #c82333);
+    color: #fff;
+  }
+
+  .gaming-badge.neutral {
+    background: #444;
+    color: #ccc;
+  }
+
+  .gaming-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    font-weight: 700;
+  }
+
+  .gaming-btn.success {
+    color: #00ff99;
+    border-color: #00ff99;
+  }
+
+  .gaming-btn.danger {
+    color: #ff4d4d;
+    border-color: #ff4d4d;
+  }
+
+  .gaming-btn.success:hover {
+    background: #00ff99;
+    color: #000;
+  }
+
+  .gaming-btn.danger:hover {
+    background: #ff4d4d;
+    color: #fff;
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+  alert("{{ m|escapejs }}");
+</script>
+{% endfor %}
+
+{% block content %}
+<section class="contact-section section_padding">
+  <div class="container">
+
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="contact-title gaming-title">Login</h2>
+        <p class="text-muted">Access your battle station</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+
+        <div class="card gaming-card p-4 p-md-5">
+
+          <form class="form-contact contact_form"
+                action="/login/"
+                method="post"
+                novalidate="novalidate">
+
+            {% csrf_token %}
+
+            <div class="row">
+
+              <!-- Username -->
+              <div class="col-12 mb-4">
+                <label class="form-label text-white">Username / Email</label>
+                <input
+                  class="form-control gaming-input"
+                  type="text"
+                  name="username"
+                  placeholder="Enter email or username"
+                  required>
+              </div>
+
+              <!-- Password -->
+              <div class="col-12 mb-4">
+                <label class="form-label text-white">Password</label>
+                <input
+                  class="form-control gaming-input"
+                  type="password"
+                  name="password"
+                  placeholder="Enter password"
+                  required>
+              </div>
+
+            </div>
+
+            <div class="text-center mt-3">
+              <button type="submit" class="btn gaming-btn px-5">
+                Login
+              </button>
+            </div>
+
+          </form>
+
+          <p class="mt-4 text-center text-muted">
+            Don’t have an account?
+            <a href="/user_register/" class="text-info">Register here</a>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE-SPECIFIC GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .gaming-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .gaming-input:focus {
+    background: #05070c;
+    color: #fff;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+
+  .gaming-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+</style>
+
+{% endblock %}

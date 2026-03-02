@@ -1,0 +1,159 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Page Wrapper (FIXED OFFSET) -->
+<section class="section_padding py-5 user-page">
+
+  <!-- Page Header -->
+  <div class="container mb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 text-center">
+        <h2 class="gaming-title">
+          <i class="fas fa-comment-alt text-info mr-2"></i>
+          Add Feedback
+        </h2>
+        <p class="text-muted mb-0">Share your experience about the tournament</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+
+        <div class="card gaming-card shadow-lg border-0 overflow-hidden">
+
+          <div class="card-header bg-dark p-4 text-center">
+            <h4 class="text-info mb-0 fw-bold">
+              <i class="fas fa-chart-line mr-2"></i> Feedback Analysis
+            </h4>
+          </div>
+
+          <div class="card-body p-4 p-md-5">
+
+            <form method="post" action="/add_feedback/">
+              {% csrf_token %}
+              <input type="hidden" name="tournament_id" value="{{ tournament.id }}">
+
+              <!-- Rating -->
+              <div class="form-group mb-4">
+                <label class="text-muted small fw-bold text-uppercase">Experience Rating</label>
+                <div class="rating-stars p-3 bg-black rounded border border-dark d-flex justify-content-between">
+                  {% for i in "12345" %}
+                  <div class="custom-control custom-radio custom-control-inline mx-0">
+                    <input type="radio"
+                           id="star{{ i }}"
+                           name="rating"
+                           value="{{ i }}"
+                           class="custom-control-input"
+                           required>
+                    <label class="custom-control-label text-warning" for="star{{ i }}">
+                      <i class="fas fa-star"></i> {{ i }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- Subject -->
+              <div class="form-group mb-4">
+                <label class="text-muted small fw-bold text-uppercase">Subject</label>
+                <input type="text"
+                       name="subject"
+                       class="form-control form_input_dark"
+                       placeholder="e.g. Tournament organization"
+                       required>
+              </div>
+
+              <!-- Message -->
+              <div class="form-group mb-4">
+                <label class="text-muted small fw-bold text-uppercase">Message</label>
+                <textarea name="message"
+                          class="form-control form_input_dark"
+                          rows="5"
+                          placeholder="Write your feedback here..."
+                          required></textarea>
+              </div>
+
+              <!-- Actions -->
+              <div class="text-center mt-5">
+                <button type="submit" class="btn_1 px-5 py-3 w-100">
+                  <i class="fas fa-paper-plane mr-2"></i> Submit Feedback
+                </button>
+
+                <a href="/user_view_tournaments/"
+                   class="d-inline-block mt-3 text-muted small">
+                  <i class="fas fa-arrow-left mr-1"></i> Back to tournaments
+                </a>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- STYLES -->
+<style>
+  /* 🔥 SAME FIX USED IN OTHER PAGES */
+  .user-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .user-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(23, 162, 184, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
+  }
+
+  .form_input_dark {
+    background-color: #000 !important;
+    border: 1px solid #333 !important;
+    color: #fff !important;
+    border-radius: 10px;
+    padding: 12px 15px;
+  }
+
+  .form_input_dark:focus {
+    border-color: #17a2b8 !important;
+    box-shadow: 0 0 10px rgba(23,162,184,0.3) !important;
+  }
+
+  .bg-black {
+    background-color: #000;
+  }
+
+  .rating-stars label {
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .rating-stars label:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.6);
+  }
+</style>
+
+{% endblock %}

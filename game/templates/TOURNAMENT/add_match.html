@@ -1,0 +1,158 @@
+{% extends 'TOURNAMENT/commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+  alert("{{ m|escapejs }}");
+</script>
+{% endfor %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">Add Match</h2>
+        <p class="text-muted">Schedule a new match for your tournament</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="card gaming-card p-4 p-md-5">
+
+          <h4 class="text-white mb-4">Schedule New Match</h4>
+
+          <form action="/add_match/" method="post">
+            {% csrf_token %}
+
+            <div class="row">
+
+              <!-- Tournament -->
+              <div class="col-12 mb-4">
+                <label class="form-label text-white">Select Tournament</label>
+                <select class="form-control gaming-input scroll-select"
+                        name="tournament"
+                        size="5"
+                        required>
+                  {% for t in tournaments %}
+                    <option value="{{ t.id }}">
+                      {{ t.name }} ({{ t.game.name }})
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Team 1 -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Team 1</label>
+                <select class="form-control gaming-input scroll-select"
+                        name="team1"
+                        size="5"
+                        required>
+                  {% for t in teams %}
+                    <option value="{{ t.id }}">{{ t.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Team 2 -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Team 2</label>
+                <select class="form-control gaming-input scroll-select"
+                        name="team2"
+                        size="5"
+                        required>
+                  {% for t in teams %}
+                    <option value="{{ t.id }}">{{ t.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Schedule -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Scheduled At</label>
+                <input type="datetime-local"
+                       class="form-control gaming-input"
+                       name="scheduled_at"
+                       required>
+              </div>
+
+              <!-- Round -->
+              <div class="col-md-6 mb-4">
+                <label class="form-label text-white">Round</label>
+                <input type="text"
+                       class="form-control gaming-input"
+                       name="round_name"
+                       placeholder="Quarter / Semi / Final">
+              </div>
+
+            </div>
+
+            <div class="d-flex flex-column flex-md-row gap-3 mt-4">
+              <button type="submit" class="btn gaming-btn flex-fill">
+                Create Match
+              </button>
+
+              <a href="/tc_view_matches/"
+                 class="btn gaming-btn-secondary flex-fill text-center">
+                Cancel
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+  }
+
+  .gaming-input {
+    background: #05070c;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* 🔥 THIS FIXES THE COLLISION */
+  .scroll-select {
+    max-height: 160px;     /* fixed height */
+    overflow-y: auto;     /* scroll inside */
+  }
+
+  .scroll-select option {
+    padding: 8px;
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border-radius: 30px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .gaming-btn-secondary {
+    border: 1px solid #00ffff;
+    border-radius: 30px;
+    color: #00ffff;
+  }
+</style>
+
+{% endblock %}

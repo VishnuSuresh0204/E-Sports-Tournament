@@ -1,0 +1,142 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE WRAPPER (FIX NAVBAR OVERLAP) -->
+<section class="section_padding py-5 user-page">
+
+  <!-- Page Header -->
+  <div class="container mb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="gaming-title">
+          <i class="fas fa-user-plus text-info mr-2"></i>
+          Enlistment Bureau
+        </h2>
+        <p class="text-muted mb-0">
+          Recruiting new talent for <span class="text-info fw-bold">{{ team.name }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+
+        <div class="card gaming-card shadow-lg border-0 overflow-hidden">
+          <div class="card-header bg-dark p-4 border-bottom border-secondary text-center">
+            <h4 class="text-info mb-0 fw-bold">
+              <i class="fas fa-id-badge mr-2"></i> Personnel Request
+            </h4>
+          </div>
+
+          <div class="card-body p-4 p-md-5">
+            <form method="post" action="/add_team_member/">
+              {% csrf_token %}
+              <input type="hidden" name="team_id" value="{{ team.id }}">
+
+              <!-- Gamer Tag -->
+              <div class="form-group mb-4">
+                <label class="text-muted small fw-bold text-uppercase">
+                  Target Player Gamer Tag
+                </label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-black border-dark text-info">
+                      <i class="fas fa-id-card"></i>
+                    </span>
+                  </div>
+                  <input type="text"
+                         name="gamer_tag"
+                         class="form-control form_input_dark"
+                         placeholder="e.g. Ninja88"
+                         required>
+                </div>
+                <small class="text-muted mt-2 d-block">
+                  If the player is not registered, they will be added as a guest.
+                </small>
+              </div>
+
+              <!-- Role -->
+              <div class="form-group mb-4">
+                <label class="text-muted small fw-bold text-uppercase">
+                  Operational Role
+                </label>
+                <input type="text"
+                       name="role"
+                       class="form-control form_input_dark"
+                       value="Player"
+                       placeholder="e.g. Sniper, Support">
+              </div>
+
+              <!-- Actions -->
+              <div class="text-center mt-5">
+                <button type="submit" class="btn_1 px-5 py-3 btn-block">
+                  <i class="fas fa-check-circle mr-2"></i> Confirm Enlistment
+                </button>
+
+                <a href="/team_detail/?id={{ team.id }}"
+                   class="d-block mt-3 text-muted small">
+                  <i class="fas fa-arrow-left mr-1"></i> Cancel and return
+                </a>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- STYLES -->
+<style>
+  /* SAME FIX USED ON OTHER USER PAGES */
+  .user-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .user-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(23, 162, 184, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
+  }
+
+  .form_input_dark {
+    background-color: #000 !important;
+    border: 1px solid #333 !important;
+    color: #fff !important;
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+  }
+
+  .form_input_dark:focus {
+    border-color: #0dcaf0 !important;
+    box-shadow: 0 0 10px rgba(13, 202, 240, 0.3) !important;
+  }
+
+  .input-group-text {
+    border-radius: 10px 0 0 10px;
+  }
+</style>
+
+{% endblock %}

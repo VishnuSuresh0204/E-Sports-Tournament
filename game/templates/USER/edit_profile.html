@@ -1,0 +1,195 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE WRAPPER (FIX NAVBAR OVERLAP) -->
+<section class="section_padding py-5 user-page">
+
+  <!-- Page Header -->
+  <div class="container mb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="gaming-title">
+          <i class="fas fa-user-edit text-info mr-2"></i>
+          Edit Profile
+        </h2>
+        <p class="text-muted mb-0">Manage your personal and gaming details</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Card -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="card gaming-card shadow-lg border-0 overflow-hidden">
+          <div class="card-header bg-dark p-4 d-flex align-items-center">
+            <div class="avatar-circle mr-3">
+              <i class="fas fa-user-cog text-info fa-2x"></i>
+            </div>
+            <div>
+              <h4 class="text-white mb-0 fw-bold">Update Information</h4>
+              <small class="text-info text-uppercase tracking-wider">
+                Account Maintenance
+              </small>
+            </div>
+          </div>
+
+          <div class="card-body p-4 p-md-5">
+
+            {% for m in messages %}
+            <div class="alert alert-{{ m.tags }} alert-dismissible fade show" role="alert">
+              {{ m }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+
+            <form action="/user_profile/edit/" method="POST" class="contact_form">
+              {% csrf_token %}
+
+              <div class="row">
+
+                <!-- Name -->
+                <div class="col-md-6 mb-4">
+                  <label class="text-muted small text-uppercase fw-bold">
+                    <i class="fas fa-user mr-2"></i> Full Name
+                  </label>
+                  <input type="text"
+                         name="name"
+                         class="form-control form_input_dark"
+                         value="{{ profile.name }}"
+                         required>
+                </div>
+
+                <!-- Phone -->
+                <div class="col-md-6 mb-4">
+                  <label class="text-muted small text-uppercase fw-bold">
+                    <i class="fas fa-phone mr-2"></i> Phone Contact
+                  </label>
+                  <input type="text"
+                         name="phone"
+                         class="form-control form_input_dark"
+                         value="{{ profile.phone }}"
+                         required>
+                </div>
+
+                <!-- Game -->
+                <div class="col-md-6 mb-4">
+                  <label class="text-muted small text-uppercase fw-bold">
+                    <i class="fas fa-gamepad mr-2"></i> Primary Game
+                  </label>
+                  <select name="game" class="form-control form_input_dark">
+                    {% for g in games %}
+                      <option value="{{ g.id }}" {% if g.is_selected %}selected{% endif %}>
+                        {{ g.name }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <!-- Gamer Tag -->
+                <div class="col-md-6 mb-4">
+                  <label class="text-muted small text-uppercase fw-bold">
+                    <i class="fas fa-id-badge mr-2"></i> Gamer Tag
+                  </label>
+                  <input type="text"
+                         class="form-control"
+                         value="{{ profile.gamer_tag }}"
+                         readonly disabled>
+                </div>
+
+                <!-- Address -->
+                <div class="col-12 mb-4">
+                  <label class="text-muted small text-uppercase fw-bold">
+                    <i class="fas fa-map-marker-alt mr-2"></i> Address
+                  </label>
+                  <textarea name="address"
+                            class="form-control form_input_dark"
+                            rows="3"
+                            required>{{ profile.address }}</textarea>
+                </div>
+
+              </div>
+
+              <hr class="my-4">
+
+              <!-- Actions -->
+              <div class="d-flex justify-content-center gap-3">
+                <button type="submit" class="btn_1 px-5 py-2 mr-3">
+                  <i class="fas fa-save mr-2"></i> Save Changes
+                </button>
+
+                <a href="/user_profile/"
+                   class="btn btn-outline-light px-5 py-2">
+                  <i class="fas fa-times mr-2"></i> Cancel
+                </a>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- STYLES -->
+<style>
+  /* SAME FIX USED IN OTHER USER PAGES */
+  .user-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .user-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(23, 162, 184, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
+  }
+
+  .tracking-wider {
+    letter-spacing: 1px;
+  }
+
+  .avatar-circle {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form_input_dark {
+    background-color: #000 !important;
+    border: 1px solid #333 !important;
+    color: #fff !important;
+    border-radius: 10px;
+    padding: 12px 15px;
+  }
+
+  .form_input_dark:focus {
+    border-color: #17a2b8 !important;
+    box-shadow: 0 0 10px rgba(23, 162, 184, 0.3) !important;
+  }
+</style>
+
+{% endblock %}

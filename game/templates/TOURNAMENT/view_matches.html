@@ -1,0 +1,212 @@
+{% extends 'TOURNAMENT/commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>alert("{{ m|escapejs }}");</script>
+{% endfor %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <!-- Page Header -->
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <h2 class="gaming-title">
+          <i class="fas fa-calendar-alt mr-2 text-info"></i> Match Schedule
+        </h2>
+        <p class="text-muted mb-0">View and manage scheduled showdowns</p>
+      </div>
+
+      <div class="col-md-6 text-md-right mt-3 mt-md-0">
+        <a href="/add_match/" class="btn gaming-btn">
+          <i class="fas fa-plus-circle mr-2"></i> Schedule Match
+        </a>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card gaming-card overflow-hidden">
+
+          <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0 align-middle">
+
+              <thead class="gaming-thead">
+                <tr>
+                  <th class="px-4">Tournament</th>
+                  <th>Matchup</th>
+                  <th>Time</th>
+                  <th>Round</th>
+                  <th>Score</th>
+                  <th>Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for m in matches %}
+                <tr>
+
+                  <td class="px-4 fw-bold text-info">
+                    {{ m.tournament.name }}
+                  </td>
+
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <span class="badge gaming-badge-secondary">{{ m.team1.name }}</span>
+                      <span class="mx-2 text-muted small">VS</span>
+                      <span class="badge gaming-badge-secondary">{{ m.team2.name }}</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <small>
+                      <i class="far fa-clock text-warning mr-1"></i>
+                      {{ m.scheduled_at|date:"d M, H:i" }}
+                    </small>
+                  </td>
+
+                  <td>
+                    <span class="text-muted small">
+                      {{ m.round_name|default:"Elimination" }}
+                    </span>
+                  </td>
+
+                  <td>
+                    {% if m.status == "Completed" %}
+                      <span class="fw-bold text-success">
+                        {{ m.team1_score }} - {{ m.team2_score }}
+                      </span>
+                    {% else %}
+                      <span class="text-muted">—</span>
+                    {% endif %}
+                  </td>
+
+                  <td>
+                    {% if m.status == "Scheduled" %}
+                      <span class="badge gaming-badge-warning">Pending</span>
+                    {% else %}
+                      <span class="badge gaming-badge-success">Completed</span>
+                    {% endif %}
+                  </td>
+
+                  <td class="text-center">
+                    <a href="/update_match_result/?id={{ m.id }}"
+                       class="btn btn-sm gaming-btn-icon info">
+                      Update
+                    </a>
+                  </td>
+
+                </tr>
+
+                {% empty %}
+                <tr>
+                  <td colspan="7" class="text-center py-5">
+                    <div class="text-muted">
+                      <i class="fas fa-calendar-times fa-3x mb-3"></i>
+                      <p>No matches scheduled yet.</p>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-thead {
+    background: #05070c;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .table-dark {
+    background: transparent;
+  }
+
+  .table-dark td {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: middle;
+  }
+
+  .gaming-badge-secondary {
+    background: #2a2f3a;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  .gaming-badge-success {
+    background: linear-gradient(135deg, #00ff99, #00cc66);
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+
+  .gaming-badge-warning {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 10px 26px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .gaming-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .gaming-btn-icon {
+    border-radius: 20px;
+    padding: 6px 16px;
+    border: 1px solid #00ffff;
+    background: transparent;
+    color: #00ffff;
+    font-weight: 600;
+  }
+
+  .gaming-btn-icon:hover {
+    background: #00ffff;
+    color: #000;
+  }
+</style>
+
+{% endblock %}

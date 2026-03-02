@@ -1,0 +1,200 @@
+{% extends 'ADMIN/commen.html' %}
+{% load static %}
+
+{% for m in messages %}
+<script>
+  alert("{{ m|escapejs }}");
+</script>
+{% endfor %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <!-- Page Title -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">Player Feedback</h2>
+        <p class="text-muted">View and respond to player experiences</p>
+      </div>
+    </div>
+
+    <!-- Feedback Table -->
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card gaming-card border-0 overflow-hidden">
+
+          <div class="card-header bg-transparent p-4 border-bottom">
+            <h4 class="text-white mb-0">
+              <i class="fas fa-comments mr-2 text-info"></i> Player Interactions
+            </h4>
+          </div>
+
+          <div class="card-body p-0">
+            <div class="table-responsive">
+
+              <table class="table table-hover mb-0 align-middle gaming-table">
+                <thead>
+                  <tr>
+                    <th class="px-4">#</th>
+                    <th>User & Tournament</th>
+                    <th>Rating</th>
+                    <th>Feedback</th>
+                    <th>Admin Response</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for f in feedbacks %}
+                  <tr>
+                    <td class="px-4 text-muted">{{ forloop.counter }}</td>
+
+                    <td>
+                      <div class="fw-bold text-white">
+                        {{ f.user.gamer_tag }}
+                      </div>
+                      <small class="text-info">
+                        {{ f.tournament.name }}
+                      </small>
+                    </td>
+
+                    <td>
+                      <div class="rating-stars">
+                        {% for i in "12345" %}
+                        <i class="fas fa-star {% if forloop.counter > f.rating %}text-muted{% else %}text-warning{% endif %}"></i>
+                        {% endfor %}
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="fw-bold small text-white">
+                        {{ f.subject }}
+                      </div>
+                      <div class="text-muted small">
+                        {{ f.message }}
+                      </div>
+                    </td>
+
+                    <td>
+                      {% if f.admin_reply %}
+                      <div class="reply-box">
+                        {{ f.admin_reply }}<br>
+                        <small class="text-muted">
+                          <i class="far fa-clock mr-1"></i>
+                          {{ f.reply_date|date:"d M Y" }}
+                        </small>
+                      </div>
+                      {% else %}
+                      <span class="badge pending-badge">
+                        Waiting for Response
+                      </span>
+                      {% endif %}
+                    </td>
+
+                    <td class="text-center">
+                      <a href="/reply_feedback/?id={{ f.id }}"
+                         class="btn gaming-btn-sm">
+                        Reply
+                      </a>
+                    </td>
+                  </tr>
+
+                  {% empty %}
+                  <tr>
+                    <td colspan="6" class="text-center py-5">
+                      <div class="text-muted">
+                        <i class="far fa-comment-slash fa-3x mb-3"></i>
+                        <p>No feedback has been received yet.</p>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAGE-SPECIFIC GAMING STYLES -->
+<style>
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+  }
+
+  .gaming-table thead {
+    background: rgba(0, 255, 255, 0.08);
+  }
+
+  .gaming-table th {
+    color: #00ffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  .gaming-table td {
+    padding: 1.25rem 1rem;
+    vertical-align: middle;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gaming-table tbody tr:hover {
+    background: rgba(0, 255, 255, 0.05);
+  }
+
+  .reply-box {
+    background: rgba(0, 255, 0, 0.08);
+    border-left: 3px solid #28a745;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #fff;
+  }
+
+  .pending-badge {
+    background: #ffc107;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  .gaming-btn-sm {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .gaming-btn-sm:hover {
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+  }
+</style>
+
+{% endblock %}

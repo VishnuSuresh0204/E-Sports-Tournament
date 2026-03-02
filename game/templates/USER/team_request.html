@@ -1,0 +1,161 @@
+{% extends 'USER/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- PAGE WRAPPER (NAVBAR SAFE OFFSET) -->
+<section class="section_padding py-5 user-page">
+
+  <!-- Page Header -->
+  <div class="container mb-5 text-center">
+    <h2 class="gaming-title">
+      <i class="fas fa-shield-alt text-info mr-2"></i>
+      Team Request
+    </h2>
+    <p class="text-muted">
+      Submit a squad formation request for admin approval
+    </p>
+  </div>
+
+  <!-- Content Section -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="card gaming-card overflow-hidden">
+          <div class="card-header bg-dark p-4 border-bottom border-secondary">
+            <h4 class="text-info mb-0 fw-bold">
+              <i class="fas fa-flag mr-2"></i>
+              Squadron Manifesto
+            </h4>
+          </div>
+
+          <div class="card-body p-4 p-md-5">
+            <form method="post" action="/user_team_request/" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <div class="row">
+                <div class="col-md-7 mb-4">
+                  <label class="text-muted small fw-bold text-uppercase">
+                    Legion Name
+                  </label>
+                  <input type="text"
+                         name="team_name"
+                         class="form-control form_input_dark"
+                         placeholder="e.g. Phoenix Vanguard"
+                         required>
+                </div>
+
+                <div class="col-md-5 mb-4">
+                  <label class="text-muted small fw-bold text-uppercase">
+                    Banner / Logo
+                  </label>
+                  <div class="custom-file">
+                    <input type="file"
+                           name="logo"
+                           class="custom-file-input"
+                           id="teamLogo">
+                    <label class="custom-file-label form_input_dark"
+                           for="teamLogo">
+                      Choose file…
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="text-muted small fw-bold text-uppercase">
+                  Mission Statement / Reason
+                </label>
+                <textarea name="reason"
+                          class="form-control form_input_dark"
+                          rows="3"
+                          placeholder="Describe your squad's objectives and vision…"></textarea>
+              </div>
+
+              <div class="mb-4">
+                <label class="text-muted small fw-bold text-uppercase">
+                  Initial Personnel List (Optional)
+                </label>
+                <textarea name="members_list"
+                          class="form-control form_input_dark"
+                          rows="3"
+                          placeholder="Enter gamer tags of planned members…"></textarea>
+                <small class="text-muted mt-2 d-block">
+                  Helps administrators verify squad strength during approval.
+                </small>
+              </div>
+
+              <div class="text-center mt-5">
+                <button type="submit" class="btn_1 px-5 py-3">
+                  <i class="fas fa-paper-plane mr-2"></i>
+                  Submit Request
+                </button>
+
+                <div class="mt-4">
+                  <a href="/user_team_requests/"
+                     class="text-info small fw-bold">
+                    <i class="fas fa-history mr-1"></i>
+                    Track My Requests
+                  </a>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- GAMING UI STYLES -->
+<style>
+  /* GLOBAL NAVBAR FIX */
+  .user-page {
+    margin-top: 130px;
+  }
+
+  @media (max-width: 768px) {
+    .user-page {
+      margin-top: 160px;
+    }
+  }
+
+  .gaming-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(23, 162, 184, 0.6);
+  }
+
+  .gaming-card {
+    background: #0b0f17;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
+  }
+
+  .form_input_dark {
+    background-color: #000 !important;
+    border: 1px solid #333 !important;
+    color: #fff !important;
+    border-radius: 10px;
+    padding: 12px 15px;
+  }
+
+  .form_input_dark:focus {
+    border-color: #17a2b8 !important;
+    box-shadow: 0 0 10px rgba(23, 162, 184, 0.3) !important;
+  }
+
+  .custom-file-label::after {
+    background-color: #333;
+    color: #fff;
+    border-left: 1px solid #444;
+  }
+</style>
+
+{% endblock %}

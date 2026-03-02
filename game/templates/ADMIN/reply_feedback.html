@@ -1,0 +1,94 @@
+{% extends 'ADMIN/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section_padding">
+  <div class="container">
+
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="gaming-title">Reply to Feedback</h2>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card gaming-card p-4 p-md-5">
+
+          <!-- Original Feedback -->
+          <div class="mb-4 p-3 rounded" style="background: rgba(255,255,255,0.05);">
+            <div class="d-flex justify-content-between mb-2">
+              <h5 class="text-info mb-0">{{ feedback.subject }}</h5>
+              <span class="badge badge-warning">
+                <i class="fas fa-star"></i> {{ feedback.rating }}
+              </span>
+            </div>
+            <p class="text-white mb-2">{{ feedback.message }}</p>
+            <small class="text-muted">
+              By {{ feedback.user.gamer_tag }} on {{ feedback.created_at|date:"d M Y" }}
+            </small>
+          </div>
+
+          <!-- Reply Form -->
+          <form method="post" action="/reply_feedback/?id={{ feedback.id }}">
+            {% csrf_token %}
+            
+            <div class="form-group mb-4">
+              <label class="text-white">Your Reply</label>
+              <textarea name="admin_reply" 
+                        class="form-control gaming-input" 
+                        rows="5"
+                        required>{{ feedback.admin_reply|default:'' }}</textarea>
+            </div>
+
+            <button type="submit" class="btn gaming-btn w-100">
+              Send Reply
+            </button>
+            
+            <a href="/admin_view_feedback/" class="btn btn-outline-light w-100 mt-3 rounded-pill">
+              Cancel
+            </a>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .gaming-title {
+    font-weight: 800;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  }
+  .gaming-card {
+    background: #0b0f17;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+  }
+  .gaming-input {
+    background: #05070c;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+  .gaming-input:focus {
+    background: #05070c;
+    color: #fff;
+    border-color: #00ffff;
+  }
+  .gaming-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+  }
+</style>
+
+{% endblock %}
