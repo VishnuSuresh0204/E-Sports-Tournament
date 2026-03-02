@@ -66,7 +66,8 @@
               <!-- Schedule -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Scheduled At</label>
-                <input type="datetime-local" class="form-control gaming-input" name="scheduled_at" required>
+                <input type="datetime-local" class="form-control gaming-input" name="scheduled_at" required
+                  min="{% now 'Y-m-d\TH:i' %}">
               </div>
 
               <!-- Round -->

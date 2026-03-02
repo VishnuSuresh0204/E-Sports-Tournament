@@ -32,34 +32,39 @@
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Full Name</label>
                 <input type="text" name="name" class="form-control gaming-input" required minlength="3"
-                  pattern="[A-Za-z ]+" title="Only letters and spaces allowed (min 3 characters)">
+                  pattern="[A-Za-z ]+" title="Only letters and spaces allowed (min 3 characters)" autocomplete="name"
+                  placeholder="Enter full name">
               </div>
 
               <!-- Username -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Username</label>
                 <input type="text" name="username" class="form-control gaming-input" required minlength="4"
-                  pattern="[a-zA-Z0-9_]+" title="Minimum 4 characters. Letters, numbers, underscore only">
+                  pattern="[a-zA-Z0-9_]+" title="Minimum 4 characters. Letters, numbers, underscore only"
+                  autocomplete="username" placeholder="Choose username">
               </div>
 
               <!-- Email -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Email Address</label>
-                <input type="email" name="email" class="form-control gaming-input" required>
+                <input type="email" name="email" class="form-control gaming-input" required autocomplete="email"
+                  placeholder="Enter email">
               </div>
 
               <!-- Phone -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Phone Number</label>
                 <input type="tel" name="phone" class="form-control gaming-input" required pattern="[0-9]{10}"
-                  maxlength="10" title="Enter a valid 10-digit phone number">
+                  maxlength="10" title="Enter a valid 10-digit phone number" autocomplete="tel"
+                  placeholder="Enter phone number">
               </div>
 
               <!-- Password -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Password</label>
                 <input type="password" name="password" class="form-control gaming-input" required minlength="6"
-                  title="Password must be at least 6 characters">
+                  title="Password must be at least 6 characters" autocomplete="new-password"
+                  placeholder="Enter password">
               </div>
 
               <!-- Profile Picture -->

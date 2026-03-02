@@ -41,37 +41,29 @@
             <!-- Tournament Name -->
             <div class="mb-4">
               <label class="form-label text-white">Tournament Name</label>
-              <input type="text"
-                     class="form-control gaming-input"
-                     name="name"
-                     value="{{ tournament.name }}"
-                     required>
+              <input type="text" class="form-control gaming-input" name="name" value="{{ tournament.name }}" required>
             </div>
 
             <!-- Game -->
             <div class="mb-4">
               <label class="form-label text-white">Game</label>
-              <input type="text"
-                     class="form-control gaming-input"
-                     value="{{ tournament.game.name }}"
-                     disabled>
+              <input type="text" class="form-control gaming-input" value="{{ tournament.game.name }}" disabled>
             </div>
 
             <!-- Description -->
             <div class="mb-4">
               <label class="form-label text-white">Description</label>
-              <textarea class="form-control gaming-input"
-                        name="description"
-                        rows="4">{{ tournament.description }}</textarea>
+              <textarea class="form-control gaming-input" name="description" rows="4"
+                required>{{ tournament.description }}</textarea>
             </div>
 
             <!-- Status -->
             <div class="mb-4">
               <label class="form-label text-white">Tournament Status</label>
               <select class="form-control gaming-input" name="status">
-                <option value="Upcoming" {% if tournament.status == "Upcoming" %}selected{% endif %}>Upcoming</option>
-                <option value="Ongoing" {% if tournament.status == "Ongoing" %}selected{% endif %}>Ongoing</option>
-                <option value="Completed" {% if tournament.status == "Completed" %}selected{% endif %}>Completed</option>
+                <option value="Upcoming" {% if tournament.status=="Upcoming" %}selected{% endif %}>Upcoming</option>
+                <option value="Ongoing" {% if tournament.status=="Ongoing" %}selected{% endif %}>Ongoing</option>
+                <option value="Completed" {% if tournament.status=="Completed" %}selected{% endif %}>Completed</option>
               </select>
             </div>
 
@@ -82,17 +74,13 @@
             <div class="row">
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Start Date</label>
-                <input class="form-control gaming-input"
-                       type="datetime-local"
-                       name="start_date"
-                       value="{{ tournament.start_date|date:'Y-m-d\\TH:i' }}">
+                <input class="form-control gaming-input" type="datetime-local" name="start_date"
+                  value="{{ tournament.start_date|date:'Y-m-d\\TH:i' }}" required min="{% now 'Y-m-d\TH:i' %}">
               </div>
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">End Date</label>
-                <input class="form-control gaming-input"
-                       type="datetime-local"
-                       name="end_date"
-                       value="{{ tournament.end_date|date:'Y-m-d\\TH:i' }}">
+                <input class="form-control gaming-input" type="datetime-local" name="end_date"
+                  value="{{ tournament.end_date|date:'Y-m-d\\TH:i' }}" required min="{% now 'Y-m-d\TH:i' %}">
               </div>
             </div>
 
@@ -101,17 +89,15 @@
             <div class="row">
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Registration Opens</label>
-                <input class="form-control gaming-input"
-                       type="datetime-local"
-                       name="registration_open_at"
-                       value="{{ tournament.registration_open_at|date:'Y-m-d\\TH:i' }}">
+                <input class="form-control gaming-input" type="datetime-local" name="registration_open_at"
+                  value="{{ tournament.registration_open_at|date:'Y-m-d\\TH:i' }}" required
+                  min="{% now 'Y-m-d\TH:i' %}">
               </div>
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Registration Closes</label>
-                <input class="form-control gaming-input"
-                       type="datetime-local"
-                       name="registration_close_at"
-                       value="{{ tournament.registration_close_at|date:'Y-m-d\\TH:i' }}">
+                <input class="form-control gaming-input" type="datetime-local" name="registration_close_at"
+                  value="{{ tournament.registration_close_at|date:'Y-m-d\\TH:i' }}" required
+                  min="{% now 'Y-m-d\TH:i' %}">
               </div>
             </div>
 
@@ -119,47 +105,34 @@
             <h5 class="text-white fw-bold mb-3 mt-4">Tournament Limits</h5>
             <div class="row">
               <div class="col-md-4 mb-4">
-                <input class="form-control gaming-input"
-                       type="number"
-                       name="max_teams"
-                       value="{{ tournament.max_teams }}"
-                       placeholder="Max Teams">
+                <label class="form-label text-white">Max Teams</label>
+                <input class="form-control gaming-input" type="number" name="max_teams"
+                  value="{{ tournament.max_teams }}" placeholder="Max Teams" min="2" max="128">
               </div>
               <div class="col-md-4 mb-4">
-                <input class="form-control gaming-input"
-                       type="number"
-                       step="0.01"
-                       name="entry_fee"
-                       value="{{ tournament.entry_fee }}"
-                       placeholder="Entry Fee">
+                <label class="form-label text-white">Entry Fee (₹)</label>
+                <input class="form-control gaming-input" type="number" step="0.01" name="entry_fee"
+                  value="{{ tournament.entry_fee }}" placeholder="Entry Fee" min="0">
               </div>
               <div class="col-md-4 mb-4">
-                <input class="form-control gaming-input"
-                       type="number"
-                       step="0.01"
-                       name="prize_pool"
-                       value="{{ tournament.prize_pool }}"
-                       placeholder="Prize Pool">
+                <label class="form-label text-white">Prize Pool (₹)</label>
+                <input class="form-control gaming-input" type="number" step="0.01" name="prize_pool"
+                  value="{{ tournament.prize_pool }}" placeholder="Prize Pool" min="0">
               </div>
             </div>
 
             <!-- Mode -->
             <h5 class="text-white fw-bold mb-3 mt-4">Mode</h5>
             <div class="form-check mb-3">
-              <input class="form-check-input"
-                     type="checkbox"
-                     name="is_online"
-                     id="is_online"
-                     {% if tournament.is_online %}checked{% endif %}>
+              <input class="form-check-input" type="checkbox" name="is_online" id="is_online" {% if tournament.is_online
+                %}checked{% endif %}>
               <label class="form-check-label text-white" for="is_online">
                 Online Tournament
               </label>
             </div>
 
-            <input class="form-control gaming-input mb-4"
-                   name="location"
-                   value="{{ tournament.location }}"
-                   placeholder="Location (offline only)">
+            <input class="form-control gaming-input mb-4" name="location" value="{{ tournament.location }}"
+              placeholder="Location (offline only)">
 
             <!-- Buttons -->
             <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mt-5">
@@ -167,8 +140,7 @@
                 💾 Update Tournament
               </button>
 
-              <a href="/tc_view_tournament/"
-                 class="btn gaming-btn-secondary flex-fill text-center">
+              <a href="/tc_view_tournament/" class="btn gaming-btn-secondary flex-fill text-center">
                 ← Back
               </a>
             </div>

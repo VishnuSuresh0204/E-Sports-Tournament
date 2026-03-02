@@ -40,7 +40,7 @@
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Tournament Name</label>
                 <input class="form-control gaming-input" name="name" type="text" placeholder="Enter tournament name"
-                  required>
+                  required minlength="5">
               </div>
 
               <!-- Game Selection -->
@@ -58,29 +58,33 @@
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Description</label>
                 <textarea class="form-control gaming-input" name="description" rows="4"
-                  placeholder="Tournament description"></textarea>
+                  placeholder="Tournament description" required></textarea>
               </div>
 
               <!-- Start & End Date -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Start Date</label>
-                <input class="form-control gaming-input" name="start_date" type="datetime-local">
+                <input class="form-control gaming-input" name="start_date" type="datetime-local" required
+                  min="{% now 'Y-m-d\TH:i' %}">
               </div>
 
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">End Date</label>
-                <input class="form-control gaming-input" name="end_date" type="datetime-local">
+                <input class="form-control gaming-input" name="end_date" type="datetime-local" required
+                  min="{% now 'Y-m-d\TH:i' %}">
               </div>
 
               <!-- Registration Dates -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Registration Open</label>
-                <input class="form-control gaming-input" name="registration_open_at" type="datetime-local">
+                <input class="form-control gaming-input" name="registration_open_at" type="datetime-local" required
+                  min="{% now 'Y-m-d\TH:i' %}">
               </div>
 
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Registration Close</label>
-                <input class="form-control gaming-input" name="registration_close_at" type="datetime-local">
+                <input class="form-control gaming-input" name="registration_close_at" type="datetime-local" required
+                  min="{% now 'Y-m-d\TH:i' %}">
               </div>
 
               <!-- Max Teams / Fees -->
@@ -90,14 +94,14 @@
               </div>
 
               <div class="col-md-4 mb-4">
-                <label class="form-label text-white">Entry Fee</label>
-                <input class="form-control gaming-input" name="entry_fee" type="number" step="0.01"
+                <label class="form-label text-white">Entry Fee (₹)</label>
+                <input class="form-control gaming-input" name="entry_fee" type="number" step="0.01" min="0"
                   placeholder="Entry fee">
               </div>
 
               <div class="col-md-4 mb-4">
-                <label class="form-label text-white">Prize Pool</label>
-                <input class="form-control gaming-input" name="prize_pool" type="number" step="0.01"
+                <label class="form-label text-white">Prize Pool (₹)</label>
+                <input class="form-control gaming-input" name="prize_pool" type="number" step="0.01" min="0"
                   placeholder="Prize pool">
               </div>
 

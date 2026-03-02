@@ -39,11 +39,8 @@
                   <label class="text-muted small fw-bold text-uppercase">
                     Legion Name
                   </label>
-                  <input type="text"
-                         name="team_name"
-                         class="form-control form_input_dark"
-                         placeholder="e.g. Phoenix Vanguard"
-                         required>
+                  <input type="text" name="team_name" class="form-control form_input_dark"
+                    placeholder="e.g. Phoenix Vanguard" required minlength="3" pattern="[A-Za-z0-9 ]+">
                 </div>
 
                 <div class="col-md-5 mb-4">
@@ -51,12 +48,8 @@
                     Banner / Logo
                   </label>
                   <div class="custom-file">
-                    <input type="file"
-                           name="logo"
-                           class="custom-file-input"
-                           id="teamLogo">
-                    <label class="custom-file-label form_input_dark"
-                           for="teamLogo">
+                    <input type="file" name="logo" class="custom-file-input" id="teamLogo">
+                    <label class="custom-file-label form_input_dark" for="teamLogo">
                       Choose file…
                     </label>
                   </div>
@@ -67,20 +60,16 @@
                 <label class="text-muted small fw-bold text-uppercase">
                   Mission Statement / Reason
                 </label>
-                <textarea name="reason"
-                          class="form-control form_input_dark"
-                          rows="3"
-                          placeholder="Describe your squad's objectives and vision…"></textarea>
+                <textarea name="reason" class="form-control form_input_dark" rows="3"
+                  placeholder="Describe your squad's objectives and vision…" required minlength="10"></textarea>
               </div>
 
               <div class="mb-4">
                 <label class="text-muted small fw-bold text-uppercase">
                   Initial Personnel List (Optional)
                 </label>
-                <textarea name="members_list"
-                          class="form-control form_input_dark"
-                          rows="3"
-                          placeholder="Enter gamer tags of planned members…"></textarea>
+                <textarea name="members_list" class="form-control form_input_dark" rows="3"
+                  placeholder="Enter gamer tags of planned members…"></textarea>
                 <small class="text-muted mt-2 d-block">
                   Helps administrators verify squad strength during approval.
                 </small>
@@ -93,8 +82,7 @@
                 </button>
 
                 <div class="mt-4">
-                  <a href="/user_team_requests/"
-                     class="text-info small fw-bold">
+                  <a href="/user_team_requests/" class="text-info small fw-bold">
                     <i class="fas fa-history mr-1"></i>
                     Track My Requests
                   </a>
@@ -134,7 +122,7 @@
   .gaming-card {
     background: #0b0f17;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
   }
 

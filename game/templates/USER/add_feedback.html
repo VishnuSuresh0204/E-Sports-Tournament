@@ -44,12 +44,8 @@
                 <div class="rating-stars p-3 bg-black rounded border border-dark d-flex justify-content-between">
                   {% for i in "12345" %}
                   <div class="custom-control custom-radio custom-control-inline mx-0">
-                    <input type="radio"
-                           id="star{{ i }}"
-                           name="rating"
-                           value="{{ i }}"
-                           class="custom-control-input"
-                           required>
+                    <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" class="custom-control-input"
+                      required>
                     <label class="custom-control-label text-warning" for="star{{ i }}">
                       <i class="fas fa-star"></i> {{ i }}
                     </label>
@@ -61,21 +57,15 @@
               <!-- Subject -->
               <div class="form-group mb-4">
                 <label class="text-muted small fw-bold text-uppercase">Subject</label>
-                <input type="text"
-                       name="subject"
-                       class="form-control form_input_dark"
-                       placeholder="e.g. Tournament organization"
-                       required>
+                <input type="text" name="subject" class="form-control form_input_dark"
+                  placeholder="e.g. Tournament organization" required minlength="5">
               </div>
 
               <!-- Message -->
               <div class="form-group mb-4">
                 <label class="text-muted small fw-bold text-uppercase">Message</label>
-                <textarea name="message"
-                          class="form-control form_input_dark"
-                          rows="5"
-                          placeholder="Write your feedback here..."
-                          required></textarea>
+                <textarea name="message" class="form-control form_input_dark" rows="5"
+                  placeholder="Write your feedback here..." required></textarea>
               </div>
 
               <!-- Actions -->
@@ -84,8 +74,7 @@
                   <i class="fas fa-paper-plane mr-2"></i> Submit Feedback
                 </button>
 
-                <a href="/user_view_tournaments/"
-                   class="d-inline-block mt-3 text-muted small">
+                <a href="/user_view_tournaments/" class="d-inline-block mt-3 text-muted small">
                   <i class="fas fa-arrow-left mr-1"></i> Back to tournaments
                 </a>
               </div>
@@ -124,7 +113,7 @@
   .gaming-card {
     background: #0b0f17;
     border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
   }
 
@@ -138,7 +127,7 @@
 
   .form_input_dark:focus {
     border-color: #17a2b8 !important;
-    box-shadow: 0 0 10px rgba(23,162,184,0.3) !important;
+    box-shadow: 0 0 10px rgba(23, 162, 184, 0.3) !important;
   }
 
   .bg-black {

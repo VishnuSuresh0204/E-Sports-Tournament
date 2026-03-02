@@ -773,6 +773,18 @@ def tc_add_tournament(request):
 
         game = Game.objects.get(id=game_id)
 
+        # Date validation: no past dates
+        now = datetime.now()
+        # Convert strings to datetime objects for comparison if they are strings
+        try:
+            val_start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M') if 'T' in start_date else datetime.strptime(start_date, '%Y-%m-%d')
+            if val_start.date() < now.date():
+                messages.error(request, "Tournament start date cannot be in the past.")
+                games = Game.objects.filter(status=1)
+                return render(request, "TOURNAMENT/add_tournament.html", {"games": games})
+        except Exception:
+            pass
+
         Tournament.objects.create(
             name=name,
             game=game,
@@ -1227,6 +1239,18 @@ def add_match(request):
         tournament = Tournament.objects.get(id=tournament_id)
         team1 = Team.objects.get(id=team1_id)
         team2 = Team.objects.get(id=team2_id)
+
+        # Date validation: no past dates
+        now = datetime.now()
+        try:
+            val_scheduled = datetime.strptime(scheduled_at, '%Y-%m-%dT%H:%M')
+            if val_scheduled < now:
+                messages.error(request, "Match schedule cannot be in the past.")
+                tournaments = Tournament.objects.filter(created_by=request.user)
+                teams = Team.objects.filter(status=1)
+                return render(request, "TOURNAMENT/add_match.html", {"tournaments": tournaments, "teams": teams})
+        except Exception:
+            pass
 
         Match.objects.create(
             tournament=tournament,

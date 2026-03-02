@@ -49,11 +49,8 @@
                       <i class="fas fa-id-card"></i>
                     </span>
                   </div>
-                  <input type="text"
-                         name="gamer_tag"
-                         class="form-control form_input_dark"
-                         placeholder="e.g. Ninja88"
-                         required>
+                  <input type="text" name="gamer_tag" class="form-control form_input_dark" placeholder="e.g. Ninja88"
+                    required minlength="3" pattern="[A-Za-z0-9_]+">
                 </div>
                 <small class="text-muted mt-2 d-block">
                   If the player is not registered, they will be added as a guest.
@@ -65,11 +62,8 @@
                 <label class="text-muted small fw-bold text-uppercase">
                   Operational Role
                 </label>
-                <input type="text"
-                       name="role"
-                       class="form-control form_input_dark"
-                       value="Player"
-                       placeholder="e.g. Sniper, Support">
+                <input type="text" name="role" class="form-control form_input_dark" value="Player"
+                  placeholder="e.g. Sniper, Support" required minlength="3" pattern="[A-Za-z ]+">
               </div>
 
               <!-- Actions -->
@@ -78,8 +72,7 @@
                   <i class="fas fa-check-circle mr-2"></i> Confirm Enlistment
                 </button>
 
-                <a href="/team_detail/?id={{ team.id }}"
-                   class="d-block mt-3 text-muted small">
+                <a href="/team_detail/?id={{ team.id }}" class="d-block mt-3 text-muted small">
                   <i class="fas fa-arrow-left mr-1"></i> Cancel and return
                 </a>
               </div>
@@ -117,7 +110,7 @@
   .gaming-card {
     background: #0b0f17;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 30px rgba(23, 162, 184, 0.15);
   }
 

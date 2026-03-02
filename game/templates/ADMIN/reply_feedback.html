@@ -36,8 +36,8 @@
 
             <div class="form-group mb-4">
               <label class="text-white">Your Reply</label>
-              <textarea name="admin_reply" class="form-control gaming-input" rows="5"
-                required>{{ feedback.admin_reply|default:'' }}</textarea>
+              <textarea name="admin_reply" class="form-control gaming-input" rows="5" required
+                minlength="5">{{ feedback.admin_reply|default:'' }}</textarea>
             </div>
 
             <button type="submit" class="btn gaming-btn w-100">
