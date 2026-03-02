@@ -42,6 +42,24 @@
 
               <div class="col-md-6 mb-4">
                 <label class="text-muted small text-uppercase fw-bold">
+                  <i class="fas fa-envelope mr-2"></i> Email Address
+                </label>
+                <div class="h5 fw-bold text-white">
+                  {{ profile.email|default:"—" }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <label class="text-muted small text-uppercase fw-bold">
+                  <i class="fas fa-gamepad mr-2"></i> Primary Game
+                </label>
+                <div class="h5 fw-bold text-white">
+                  {{ profile.game.name|default:"—" }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <label class="text-muted small text-uppercase fw-bold">
                   <i class="fas fa-id-badge mr-2"></i> Gamer Tag
                 </label>
                 <div class="h5 fw-bold text-white">

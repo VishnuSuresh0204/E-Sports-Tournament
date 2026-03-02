@@ -1,0 +1,108 @@
+{% extends 'TOURNAMENT/commen.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section_padding py-5 user-page" style="margin-top: 100px;">
+
+    <div class="container mb-5 text-center">
+        <h2 class="gaming-title" style="color: #fff; font-weight: 800; text-transform: uppercase;">
+            <i class="fas fa-user-shield text-warning mr-2"></i>
+            Constructor Profile
+        </h2>
+        <p class="text-muted">
+            Management Credentials & Personal Details
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="card gaming-card overflow-hidden"
+                    style="background: #0b0f17; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 0 30px rgba(255, 193, 7, 0.15);">
+                    <div class="card-header bg-dark p-4 d-flex align-items-center">
+                        <div class="avatar-circle mr-3"
+                            style="width: 80px; height: 80px; overflow: hidden; border-radius: 50%; border: 2px solid #ffc107;">
+                            {% if profile.profile_pic %}
+                            <img src="{{ profile.profile_pic.url }}" alt="profile"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                            {% else %}
+                            <i class="fas fa-user-tie text-warning fa-3x"
+                                style="margin-top: 15px; margin-left: 18px;"></i>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h4 class="text-white mb-0 fw-bold">
+                                {{ profile.name|default:"Unnamed Constructor" }}
+                            </h4>
+                            <small class="text-warning text-uppercase" style="letter-spacing: 1px;">
+                                Tournament Director
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <div class="row">
+
+                            <div class="col-md-6 mb-4">
+                                <label class="text-muted small text-uppercase fw-bold">
+                                    <i class="fas fa-envelope mr-2"></i> Email Address
+                                </label>
+                                <div class="h5 fw-bold text-white">
+                                    {{ profile.email|default:"—" }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label class="text-muted small text-uppercase fw-bold">
+                                    <i class="fas fa-phone mr-2"></i> Phone Contact
+                                </label>
+                                <div class="h5 fw-bold text-white">
+                                    {{ profile.phone|default:"—" }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label class="text-muted small text-uppercase fw-bold">
+                                    <i class="fas fa-check-circle mr-2"></i> Account Status
+                                </label>
+                                <div
+                                    class="h5 fw-bold {% if profile.status == 'active' %}text-success{% elif profile.status == 'pending' %}text-warning{% else %}text-danger{% endif %} text-uppercase">
+                                    {{ profile.status }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label class="text-muted small text-uppercase fw-bold">
+                                    <i class="fas fa-user-tag mr-2"></i> Username
+                                </label>
+                                <div class="h5 fw-bold text-white">
+                                    {{ profile.loginid.username }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-transparent border-0 text-center pb-4">
+                        <a href="/tc_profile/edit/" class="btn_1 px-5 py-2">
+                            <i class="fas fa-edit mr-2"></i> Edit Credentials
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    .gaming-title {
+        text-shadow: 0 0 12px rgba(255, 193, 7, 0.4);
+    }
+</style>
+
+{% endblock %}

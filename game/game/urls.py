@@ -74,5 +74,9 @@ urlpatterns = [
     path("admin_view_feedback/", views.admin_view_feedback),
     path("reply_feedback/", views.reply_feedback),
 
+    # TC Profile
+    path("tc_profile/", views.tc_profile),
+    path("tc_profile/edit/", views.tc_profile_edit),
+
   
 ]

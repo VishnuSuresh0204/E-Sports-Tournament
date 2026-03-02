@@ -15,208 +15,214 @@
 </head>
 
 <body class="bg-black text-white">
-<div class="body_bg">
+    <div class="body_bg">
 
-    <!-- HEADER -->
-    <header class="main_menu single_page_menu">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="/">
-                            <img src="/static/img/logo.png" alt="logo">
-                        </a>
+        <!-- HEADER -->
+        <header class="main_menu single_page_menu">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <a class="navbar-brand" href="/">
+                                <img src="/static/img/logo.png" alt="logo">
+                            </a>
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent">
-                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
-                        </button>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent">
+                                <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                            </button>
 
-                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item"><a class="nav-link" href="/tc_home/">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/tc_view_game/">Games</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/tc_view_tournament/">Tournaments</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/tc_view_registrations/">Registrations</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/tc_view_team_requests/">Team Requests</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/tc_view_matches/">Matches</a></li>
-                                <li class="nav-item">
-                                    <a class="nav-link btn_1 ml-lg-3" href="/login/">Logout</a>
-                                </li>
-                            </ul>
+                            <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item"><a class="nav-link" href="/tc_home/">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/tc_view_game/">Games</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/tc_view_tournament/">Tournaments</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link"
+                                            href="/tc_view_registrations/">Registrations</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/tc_view_team_requests/">Team
+                                            Requests</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/tc_view_matches/">Matches</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/tc_profile/">Profile</a></li>
+                                    <li class="nav-item">
+                                        <a class="nav-link btn_1 ml-lg-3" href="/login/">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- GAMING HERO (NO IMAGE) -->
+        <section class="breadcrumb_bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="breadcrumb_iner_item">
+                            <h2>Constructor HQ</h2>
+                            <p class="text-muted mt-2">Control • Create • Conquer</p>
                         </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- GAMING HERO (NO IMAGE) -->
-    <section class="breadcrumb_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb_iner_item">
-                        <h2>Constructor HQ</h2>
-                        <p class="text-muted mt-2">Control • Create • Conquer</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- STATS GRID -->
-    <section class="py-5" style="margin-top:-60px;">
-        <div class="container">
-            <div class="row">
+        <!-- STATS GRID -->
+        <section class="py-5" style="margin-top:-60px;">
+            <div class="container">
+                <div class="row">
 
-                <div class="col-md-3 mb-4">
-                    <div class="card bg-dark border-0 shadow text-center p-4 h-100">
-                        <i class="fas fa-gamepad fa-2x text-info mb-3"></i>
-                        <h2>{{ total_games }}</h2>
-                        <p class="text-muted small">Available Games</p>
-                        <hr>
-                        <a href="/tc_view_game/" class="text-info small">View Library →</a>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card bg-dark border-0 shadow text-center p-4 h-100">
-                        <i class="fas fa-trophy fa-2x text-warning mb-3"></i>
-                        <h2>{{ total_tournaments }}</h2>
-                        <p class="text-muted small">Active Tournaments</p>
-                        <hr>
-                        <a href="/tc_view_tournament/" class="text-warning small">Manage Events →</a>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card bg-dark border-0 shadow text-center p-4 h-100">
-                        <i class="fas fa-users fa-2x text-success mb-3"></i>
-                        <h2>{{ pending_team_requests }}</h2>
-                        <p class="text-muted small">Team Requests</p>
-                        <hr>
-                        <a href="/tc_view_team_requests/" class="text-success small">Review Teams →</a>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-4">
-                    <div class="card bg-dark border-0 shadow text-center p-4 h-100">
-                        <i class="fas fa-clipboard-check fa-2x text-danger mb-3"></i>
-                        <h2>{{ pending_registrations }}</h2>
-                        <p class="text-muted small">Pending Registrations</p>
-                        <hr>
-                        <a href="/tc_view_registrations/" class="text-danger small">Approve Entries →</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ACTIONS -->
-    <section class="padding_bottom">
-        <div class="container">
-            <div class="section_tittle text-center mb-5">
-                <h2>Constructor Actions</h2>
-            </div>
-
-            <div class="row">
-
-                <div class="col-lg-4 mb-4">
-                    <div class="card bg-dark border-0 p-4 text-center h-100">
-                        <div class="icon mb-3 text-primary">
-                            <i class="fas fa-plus fa-2x"></i>
+                    <div class="col-md-3 mb-4">
+                        <div class="card bg-dark border-0 shadow text-center p-4 h-100">
+                            <i class="fas fa-gamepad fa-2x text-info mb-3"></i>
+                            <h2>{{ total_games }}</h2>
+                            <p class="text-muted small">Available Games</p>
+                            <hr>
+                            <a href="/tc_view_game/" class="text-info small">View Library →</a>
                         </div>
-                        <h4>Add Game</h4>
-                        <p class="text-muted small">Expand your esports universe</p>
-                        <a href="/add_game/" class="btn btn-primary btn-sm rounded-pill px-4">Add Game</a>
                     </div>
-                </div>
 
-                <div class="col-lg-4 mb-4">
-                    <div class="card bg-dark border-0 p-4 text-center h-100">
-                        <div class="icon mb-3 text-warning">
-                            <i class="fas fa-bolt fa-2x"></i>
+                    <div class="col-md-3 mb-4">
+                        <div class="card bg-dark border-0 shadow text-center p-4 h-100">
+                            <i class="fas fa-trophy fa-2x text-warning mb-3"></i>
+                            <h2>{{ total_tournaments }}</h2>
+                            <p class="text-muted small">Active Tournaments</p>
+                            <hr>
+                            <a href="/tc_view_tournament/" class="text-warning small">Manage Events →</a>
                         </div>
-                        <h4>Create Tournament</h4>
-                        <p class="text-muted small">Launch competitive battles</p>
-                        <a href="/add_tournament/" class="btn btn-warning btn-sm rounded-pill px-4 text-dark">
-                            Create Tournament
-                        </a>
                     </div>
-                </div>
 
-                <div class="col-lg-4 mb-4">
-                    <div class="card bg-dark border-0 p-4 text-center h-100">
-                        <div class="icon mb-3 text-info">
-                            <i class="fas fa-swords fa-2x"></i>
+                    <div class="col-md-3 mb-4">
+                        <div class="card bg-dark border-0 shadow text-center p-4 h-100">
+                            <i class="fas fa-users fa-2x text-success mb-3"></i>
+                            <h2>{{ pending_team_requests }}</h2>
+                            <p class="text-muted small">Team Requests</p>
+                            <hr>
+                            <a href="/tc_view_team_requests/" class="text-success small">Review Teams →</a>
                         </div>
-                        <h4>Schedule Match</h4>
-                        <p class="text-muted small">Set up intense matchups</p>
-                        <a href="/add_match/" class="btn btn-info btn-sm rounded-pill px-4">
-                            Schedule Match
-                        </a>
                     </div>
-                </div>
 
+                    <div class="col-md-3 mb-4">
+                        <div class="card bg-dark border-0 shadow text-center p-4 h-100">
+                            <i class="fas fa-clipboard-check fa-2x text-danger mb-3"></i>
+                            <h2>{{ pending_registrations }}</h2>
+                            <p class="text-muted small">Pending Registrations</p>
+                            <hr>
+                            <a href="/tc_view_registrations/" class="text-danger small">Approve Entries →</a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FOOTER -->
-    <footer class="footer_part py-4 bg-black">
-        <div class="container text-center">
-            <p class="text-muted small mb-0">
-                © 2026 E-Sports Constructor Portal. All rights reserved.
-            </p>
-        </div>
-    </footer>
+        <!-- ACTIONS -->
+        <section class="padding_bottom">
+            <div class="container">
+                <div class="section_tittle text-center mb-5">
+                    <h2>Constructor Actions</h2>
+                </div>
 
-</div>
+                <div class="row">
 
-<!-- GAMING STYLE -->
-<style>
-    .breadcrumb_bg {
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        padding: 120px 0;
-    }
+                    <div class="col-lg-4 mb-4">
+                        <div class="card bg-dark border-0 p-4 text-center h-100">
+                            <div class="icon mb-3 text-primary">
+                                <i class="fas fa-plus fa-2x"></i>
+                            </div>
+                            <h4>Add Game</h4>
+                            <p class="text-muted small">Expand your esports universe</p>
+                            <a href="/add_game/" class="btn btn-primary btn-sm rounded-pill px-4">Add Game</a>
+                        </div>
+                    </div>
 
-    .breadcrumb_iner_item h2 {
-        font-weight: 800;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-    }
+                    <div class="col-lg-4 mb-4">
+                        <div class="card bg-dark border-0 p-4 text-center h-100">
+                            <div class="icon mb-3 text-warning">
+                                <i class="fas fa-bolt fa-2x"></i>
+                            </div>
+                            <h4>Create Tournament</h4>
+                            <p class="text-muted small">Launch competitive battles</p>
+                            <a href="/add_tournament/" class="btn btn-warning btn-sm rounded-pill px-4 text-dark">
+                                Create Tournament
+                            </a>
+                        </div>
+                    </div>
 
-    .nav-link {
-        text-transform: uppercase;
-        font-size: 13px;
-        font-weight: 600;
-        color: #fff !important;
-    }
+                    <div class="col-lg-4 mb-4">
+                        <div class="card bg-dark border-0 p-4 text-center h-100">
+                            <div class="icon mb-3 text-info">
+                                <i class="fas fa-swords fa-2x"></i>
+                            </div>
+                            <h4>Schedule Match</h4>
+                            <p class="text-muted small">Set up intense matchups</p>
+                            <a href="/add_match/" class="btn btn-info btn-sm rounded-pill px-4">
+                                Schedule Match
+                            </a>
+                        </div>
+                    </div>
 
-    .nav-link:hover {
-        color: #00ffff !important;
-    }
+                </div>
+            </div>
+        </section>
 
-    .card {
-        transition: all 0.3s ease;
-        border-radius: 18px;
-    }
+        <!-- FOOTER -->
+        <footer class="footer_part py-4 bg-black">
+            <div class="container text-center">
+                <p class="text-muted small mb-0">
+                    © 2026 E-Sports Constructor Portal. All rights reserved.
+                </p>
+            </div>
+        </footer>
 
-    .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
-    }
+    </div>
 
-    h2, h4 {
-        font-weight: 700;
-    }
-</style>
+    <!-- GAMING STYLE -->
+    <style>
+        .breadcrumb_bg {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            padding: 120px 0;
+        }
 
-<script src="/static/js/jquery-1.12.1.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
+        .breadcrumb_iner_item h2 {
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        }
+
+        .nav-link {
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .nav-link:hover {
+            color: #00ffff !important;
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            border-radius: 18px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+        }
+
+        h2,
+        h4 {
+            font-weight: 700;
+        }
+    </style>
+
+    <script src="/static/js/jquery-1.12.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

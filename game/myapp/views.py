@@ -1152,3 +1152,37 @@ def reply_feedback(request):
         return redirect("/admin_view_feedback/")
 
     return render(request, "ADMIN/reply_feedback.html", {"feedback": feedback})
+
+
+# ------------------------------------------------
+# 14. Tournament Constructor Profile
+# ------------------------------------------------
+
+def tc_profile(request):
+    if not request.user.is_authenticated or request.user.usertype != "tournament_constructor":
+        messages.error(request, "Tournament Constructor login required.")
+        return redirect("/login/")
+    
+    profile = TournamentConstructor.objects.filter(loginid=request.user).first()
+    return render(request, "TOURNAMENT/tc_profile.html", {"profile": profile})
+
+
+def tc_profile_edit(request):
+    if not request.user.is_authenticated or request.user.usertype != "tournament_constructor":
+        messages.error(request, "Tournament Constructor login required.")
+        return redirect("/login/")
+    
+    profile = TournamentConstructor.objects.filter(loginid=request.user).first()
+
+    if request.method == "POST" and profile:
+        profile.name = request.POST.get("name")
+        profile.phone = request.POST.get("phone")
+        
+        if request.FILES.get("profile_pic"):
+            profile.profile_pic = request.FILES.get("profile_pic")
+            
+        profile.save()
+        messages.success(request, "Profile updated successfully.")
+        return redirect("/tc_profile/")
+
+    return render(request, "TOURNAMENT/edit_profile.html", {"profile": profile})

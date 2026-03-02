@@ -21,162 +21,164 @@
 
 <body class="bg-black text-white">
 
-<!-- HEADER -->
-<header class="main_menu single_page_menu">
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light">
-
-      <a class="navbar-brand" href="/">
-        <img src="/static/img/logo.png" alt="logo">
-      </a>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent">
-        <span class="menu_icon"><i class="fas fa-bars"></i></span>
-      </button>
-
-      <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="/tc_home/">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/tc_view_game/">Games</a></li>
-          <li class="nav-item"><a class="nav-link" href="/tc_view_tournament/">Tournaments</a></li>
-          <li class="nav-item"><a class="nav-link" href="/tc_view_registrations/">Registrations</a></li>
-          <li class="nav-item"><a class="nav-link" href="/tc_view_team_requests/">Team Requests</a></li>
-          <li class="nav-item"><a class="nav-link" href="/tc_view_matches/">Matches</a></li>
-          <li class="nav-item"><a class="nav-link btn_1 ml-lg-3" href="/login/">Logout</a></li>
-        </ul>
-      </div>
-
-    </nav>
-  </div>
-</header>
-<!-- HEADER END -->
-
-<!-- PAGE CONTENT -->
-{% block content %}
-{% endblock %}
-<!-- PAGE CONTENT END -->
-
-<!-- FOOTER -->
-<footer class="footer_part black">
-  <div class="footer_top">
+  <!-- HEADER -->
+  <header class="main_menu single_page_menu">
     <div class="container">
-      <div class="row">
+      <nav class="navbar navbar-expand-lg navbar-light">
 
-        <div class="col-sm-6 col-lg-3">
-          <div class="single_footer_part">
-            <a href="/" class="footer_logo_iner">
-              <img src="/static/img/logo.png" alt="#">
-            </a>
-            <p>
-              Competitive esports tournament construction and match management platform.
+        <a class="navbar-brand" href="/">
+          <img src="/static/img/logo.png" alt="logo">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="menu_icon"><i class="fas fa-bars"></i></span>
+        </button>
+
+        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/tc_home/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tc_view_game/">Games</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tc_view_tournament/">Tournaments</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tc_view_registrations/">Registrations</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tc_view_team_requests/">Team Requests</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tc_view_matches/">Matches</a></li>
+            <li class="nav-item"><a class="nav-link" href="/tc_profile/">Profile</a></li>
+            <li class="nav-item"><a class="nav-link btn_1 ml-lg-3" href="/login/">Logout</a></li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+  </header>
+  <!-- HEADER END -->
+
+  <!-- PAGE CONTENT -->
+  {% block content %}
+  {% endblock %}
+  <!-- PAGE CONTENT END -->
+
+  <!-- FOOTER -->
+  <footer class="footer_part black">
+    <div class="footer_top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm-6 col-lg-3">
+            <div class="single_footer_part">
+              <a href="/" class="footer_logo_iner">
+                <img src="/static/img/logo.png" alt="#">
+              </a>
+              <p>
+                Competitive esports tournament construction and match management platform.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3">
+            <div class="single_footer_part">
+              <h4>Contact Info</h4>
+              <p>Email : support@gaming.com</p>
+              <p>Phone : +91 90000 00000</p>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3">
+            <div class="single_footer_part">
+              <h4>Quick Links</h4>
+              <ul class="list-unstyled">
+                <li><a href="/tc_home/">Dashboard</a></li>
+                <li><a href="/tc_view_game/">Games</a></li>
+                <li><a href="/tc_view_tournament/">Tournaments</a></li>
+                <li><a href="/tc_view_matches/">Matches</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3">
+            <div class="single_footer_part">
+              <h4>Community</h4>
+              <p>Build • Host • Dominate</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="copygight_text">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <p class="mb-0">
+              ©
+              <script>document.write(new Date().getFullYear());</script>
+              E-Sports Constructor. All rights reserved.
             </p>
           </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-3">
-          <div class="single_footer_part">
-            <h4>Contact Info</h4>
-            <p>Email : support@gaming.com</p>
-            <p>Phone : +91 90000 00000</p>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-3">
-          <div class="single_footer_part">
-            <h4>Quick Links</h4>
-            <ul class="list-unstyled">
-              <li><a href="/tc_home/">Dashboard</a></li>
-              <li><a href="/tc_view_game/">Games</a></li>
-              <li><a href="/tc_view_tournament/">Tournaments</a></li>
-              <li><a href="/tc_view_matches/">Matches</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-lg-3">
-          <div class="single_footer_part">
-            <h4>Community</h4>
-            <p>Build • Host • Dominate</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="copygight_text">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-8">
-          <p class="mb-0">
-            © <script>document.write(new Date().getFullYear());</script>
-            E-Sports Constructor. All rights reserved.
-          </p>
-        </div>
-        <div class="col-lg-4 text-right">
-          <div class="footer_icon social_icon">
-            <ul class="list-unstyled d-flex justify-content-end">
-              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fas fa-globe"></i></a></li>
-              <li><a href="#"><i class="fab fa-behance"></i></a></li>
-            </ul>
+          <div class="col-lg-4 text-right">
+            <div class="footer_icon social_icon">
+              <ul class="list-unstyled d-flex justify-content-end">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fas fa-globe"></i></a></li>
+                <li><a href="#"><i class="fab fa-behance"></i></a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
-<!-- FOOTER END -->
+  </footer>
+  <!-- FOOTER END -->
 
-<!-- GLOBAL GAMING STYLE -->
-<style>
-  body {
-    background-color: #000;
-  }
+  <!-- GLOBAL GAMING STYLE -->
+  <style>
+    body {
+      background-color: #000;
+    }
 
-  .nav-link {
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 600;
-    color: #fff !important;
-  }
+    .nav-link {
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff !important;
+    }
 
-  .nav-link:hover {
-    color: #00ffff !important;
-  }
+    .nav-link:hover {
+      color: #00ffff !important;
+    }
 
-  .btn_1 {
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    border-radius: 30px;
-    padding: 10px 22px;
-    font-weight: 600;
-  }
+    .btn_1 {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      border-radius: 30px;
+      padding: 10px 22px;
+      font-weight: 600;
+    }
 
-  .footer_part {
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-</style>
+    .footer_part {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
 
-<!-- SCRIPTS -->
-<script src="/static/js/jquery-1.12.1.min.js"></script>
-<script src="/static/js/popper.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/jquery.magnific-popup.js"></script>
-<script src="/static/js/swiper.min.js"></script>
-<script src="/static/js/masonry.pkgd.js"></script>
-<script src="/static/js/owl.carousel.min.js"></script>
-<script src="/static/js/jquery.nice-select.min.js"></script>
-<script src="/static/js/slick.min.js"></script>
-<script src="/static/js/jquery.counterup.min.js"></script>
-<script src="/static/js/waypoints.min.js"></script>
-<script src="/static/js/contact.js"></script>
-<script src="/static/js/jquery.ajaxchimp.min.js"></script>
-<script src="/static/js/jquery.form.js"></script>
-<script src="/static/js/jquery.validate.min.js"></script>
-<script src="/static/js/mail-script.js"></script>
-<script src="/static/js/custom.js"></script>
+  <!-- SCRIPTS -->
+  <script src="/static/js/jquery-1.12.1.min.js"></script>
+  <script src="/static/js/popper.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/jquery.magnific-popup.js"></script>
+  <script src="/static/js/swiper.min.js"></script>
+  <script src="/static/js/masonry.pkgd.js"></script>
+  <script src="/static/js/owl.carousel.min.js"></script>
+  <script src="/static/js/jquery.nice-select.min.js"></script>
+  <script src="/static/js/slick.min.js"></script>
+  <script src="/static/js/jquery.counterup.min.js"></script>
+  <script src="/static/js/waypoints.min.js"></script>
+  <script src="/static/js/contact.js"></script>
+  <script src="/static/js/jquery.ajaxchimp.min.js"></script>
+  <script src="/static/js/jquery.form.js"></script>
+  <script src="/static/js/jquery.validate.min.js"></script>
+  <script src="/static/js/mail-script.js"></script>
+  <script src="/static/js/custom.js"></script>
 
 </body>
+
 </html>
