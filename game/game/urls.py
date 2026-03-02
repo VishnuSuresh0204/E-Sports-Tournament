@@ -1,9 +1,15 @@
 from django.contrib import admin
 from django.urls import path
 from myapp import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    
+    # TC Profile
+    path("tc_profile/", views.tc_profile),
+    path("tc_profile/edit/", views.tc_profile_edit),
 
     # Basic pages
     path("", views.index),
@@ -14,6 +20,7 @@ urlpatterns = [
 
     # Admin Dashboard
     path("admin_home/", views.admin_home),
+    # ... previous paths ...
     path("tc_home/", views.tc_index),
 
     # Tournament Constructor
@@ -35,9 +42,6 @@ urlpatterns = [
     path("delete_tournament/", views.delete_tournament),
     path("update_match_result/", views.tc_update_match_result),
     
-    
-    # Games (Admin)
-
     # User Section
     path("user_home/", views.user_home),
     path("user_profile/", views.user_profile),
@@ -74,9 +78,7 @@ urlpatterns = [
     path("admin_view_feedback/", views.admin_view_feedback),
     path("reply_feedback/", views.reply_feedback),
 
-    # TC Profile
-    path("tc_profile/", views.tc_profile),
-    path("tc_profile/edit/", views.tc_profile_edit),
-
-  
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
