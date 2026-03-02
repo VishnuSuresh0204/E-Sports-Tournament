@@ -28,11 +28,7 @@
 
         <div class="card gaming-card p-4 p-md-5">
 
-          <form class="form-contact contact_form"
-                action="/add_game/"
-                method="post"
-                id="addGameForm"
-                novalidate>
+          <form class="form-contact contact_form" action="/add_game/" method="post" id="addGameForm" novalidate>
 
             {% csrf_token %}
 
@@ -41,32 +37,19 @@
               <!-- Game Name -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Game Name</label>
-                <input
-                  class="form-control gaming-input"
-                  name="name"
-                  type="text"
-                  placeholder="Enter game name"
-                  required>
+                <input class="form-control gaming-input" name="name" type="text" placeholder="Enter game name" required>
               </div>
 
               <!-- Team Size -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team Size</label>
-                <input
-                  class="form-control gaming-input"
-                  name="team_size"
-                  type="number"
-                  min="1"
-                  placeholder="Default 5">
+                <input class="form-control gaming-input" name="team_size" type="number" min="1" placeholder="Default 5">
               </div>
 
               <!-- Description -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Description</label>
-                <textarea
-                  class="form-control gaming-input"
-                  name="description"
-                  rows="4"
+                <textarea class="form-control gaming-input" name="description" rows="4"
                   placeholder="Enter game description"></textarea>
               </div>
 
@@ -78,8 +61,7 @@
                 Add Game
               </button>
 
-              <a href="/tc_view_game/"
-                 class="btn gaming-btn-secondary flex-fill text-center">
+              <a href="/tc_view_game/" class="btn gaming-btn-secondary flex-fill text-center">
                 Back to Game List
               </a>
             </div>
@@ -94,68 +76,8 @@
   </div>
 </section>
 
-<!-- PAGE-SPECIFIC GAMING STYLES -->
-<style>
-  .gaming-title {
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-  }
+</section>
 
-  .gaming-card {
-    background: #0b0f17;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
-  }
-
-  .gaming-input {
-    background: #05070c;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-  }
-
-  .gaming-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .gaming-input:focus {
-    background: #05070c;
-    color: #fff;
-    border-color: #00ffff;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-  }
-
-  .gaming-btn {
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    border: none;
-    border-radius: 30px;
-    padding: 12px 30px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #fff;
-  }
-
-  .gaming-btn:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-    transform: translateY(-2px);
-  }
-
-  .gaming-btn-secondary {
-    background: transparent;
-    border: 1px solid #00ffff;
-    border-radius: 30px;
-    padding: 12px 30px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #00ffff;
-  }
-
-  .gaming-btn-secondary:hover {
-    background: #00ffff;
-    color: #000;
-  }
-</style>
+{% endblock %}
 
 {% endblock %}

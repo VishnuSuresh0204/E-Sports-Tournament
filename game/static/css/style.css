@@ -6494,3 +6494,53 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/* ==========================================================================
+   GLOBAL GAMING ENHANCEMENTS (Custom Scrollbars & Form UX)
+   ========================================================================== */
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #05070c;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00c6ff, #0072ff);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+/* Global Form Input Glow & Transitions */
+.gaming-input, .form_input_dark {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.gaming-input:focus, .form_input_dark:focus {
+  border-color: #00c6ff !important;
+  box-shadow: 0 0 15px rgba(0, 198, 255, 0.4) !important;
+  background-color: #05070c !important;
+  color: #fff !important;
+}
+
+/* Standard Dropdown Styling */
+select.gaming-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2300ffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+select.gaming-input option {
+  background-color: #0b0f17;
+  color: #fff;
+  padding: 10px;
+}

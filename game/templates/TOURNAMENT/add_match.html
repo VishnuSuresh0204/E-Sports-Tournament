@@ -34,14 +34,11 @@
               <!-- Tournament -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Select Tournament</label>
-                <select class="form-control gaming-input scroll-select"
-                        name="tournament"
-                        size="5"
-                        required>
+                <select class="form-control gaming-input scroll-select" name="tournament" required>
                   {% for t in tournaments %}
-                    <option value="{{ t.id }}">
-                      {{ t.name }} ({{ t.game.name }})
-                    </option>
+                  <option value="{{ t.id }}">
+                    {{ t.name }} ({{ t.game.name }})
+                  </option>
                   {% endfor %}
                 </select>
               </div>
@@ -49,12 +46,9 @@
               <!-- Team 1 -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team 1</label>
-                <select class="form-control gaming-input scroll-select"
-                        name="team1"
-                        size="5"
-                        required>
+                <select class="form-control gaming-input scroll-select" name="team1" required>
                   {% for t in teams %}
-                    <option value="{{ t.id }}">{{ t.name }}</option>
+                  <option value="{{ t.id }}">{{ t.name }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -62,12 +56,9 @@
               <!-- Team 2 -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Team 2</label>
-                <select class="form-control gaming-input scroll-select"
-                        name="team2"
-                        size="5"
-                        required>
+                <select class="form-control gaming-input scroll-select" name="team2" required>
                   {% for t in teams %}
-                    <option value="{{ t.id }}">{{ t.name }}</option>
+                  <option value="{{ t.id }}">{{ t.name }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -75,19 +66,14 @@
               <!-- Schedule -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Scheduled At</label>
-                <input type="datetime-local"
-                       class="form-control gaming-input"
-                       name="scheduled_at"
-                       required>
+                <input type="datetime-local" class="form-control gaming-input" name="scheduled_at" required>
               </div>
 
               <!-- Round -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Round</label>
-                <input type="text"
-                       class="form-control gaming-input"
-                       name="round_name"
-                       placeholder="Quarter / Semi / Final">
+                <input type="text" class="form-control gaming-input" name="round_name"
+                  placeholder="Quarter / Semi / Final">
               </div>
 
             </div>
@@ -97,8 +83,7 @@
                 Create Match
               </button>
 
-              <a href="/tc_view_matches/"
-                 class="btn gaming-btn-secondary flex-fill text-center">
+              <a href="/tc_view_matches/" class="btn gaming-btn-secondary flex-fill text-center">
                 Cancel
               </a>
             </div>
@@ -128,13 +113,15 @@
   .gaming-input {
     background: #05070c;
     color: #fff;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   /* 🔥 THIS FIXES THE COLLISION */
   .scroll-select {
-    max-height: 160px;     /* fixed height */
-    overflow-y: auto;     /* scroll inside */
+    max-height: 160px;
+    /* fixed height */
+    overflow-y: auto;
+    /* scroll inside */
   }
 
   .scroll-select option {

@@ -23,9 +23,7 @@
 
         <div class="card gaming-card p-4 p-md-5">
 
-          <form class="form-contact contact_form"
-                action="/user_register/"
-                method="post">
+          <form class="form-contact contact_form" action="/user_register/" method="post">
 
             {% csrf_token %}
 
@@ -34,72 +32,45 @@
               <!-- Name -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Full Name</label>
-                <input
-                  class="form-control gaming-input"
-                  name="name"
-                  type="text"
-                  required
-                  minlength="3"
-                  pattern="[A-Za-z ]+"
-                  placeholder="Enter your name">
+                <input class="form-control gaming-input" name="name" type="text" required minlength="3"
+                  pattern="[A-Za-z ]+" placeholder="Enter your name">
               </div>
 
               <!-- Email -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Email Address</label>
-                <input
-                  class="form-control gaming-input"
-                  name="email"
-                  type="email"
-                  required
+                <input class="form-control gaming-input" name="email" type="email" required
                   placeholder="Enter email address">
               </div>
 
               <!-- Phone -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Phone Number</label>
-                <input
-                  class="form-control gaming-input"
-                  name="phone"
-                  type="tel"
-                  required
-                  pattern="[0-9]{10}"
-                  maxlength="10"
-                  placeholder="Enter phone number">
+                <input class="form-control gaming-input" name="phone" type="tel" required pattern="[0-9]{10}"
+                  maxlength="10" placeholder="Enter phone number">
               </div>
 
               <!-- Gamer Tag -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Gamer Tag</label>
-                <input
-                  class="form-control gaming-input"
-                  name="gamer_tag"
-                  type="text"
-                  required
-                  minlength="3"
-                  pattern="[A-Za-z0-9_]+"
-                  placeholder="Choose your gamer tag">
+                <input class="form-control gaming-input" name="gamer_tag" type="text" required minlength="3"
+                  pattern="[A-Za-z0-9_]+" placeholder="Choose your gamer tag">
               </div>
 
               <!-- Address -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Address</label>
-                <input
-                  class="form-control gaming-input"
-                  name="address"
-                  type="text"
-                  required
-                  minlength="5"
+                <input class="form-control gaming-input" name="address" type="text" required minlength="5"
                   placeholder="Enter address">
               </div>
 
               <!-- Game Selection -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Preferred Game</label>
-                <select class="form-control gaming-input" name="game" size="5">
+                <select class="form-control gaming-input" name="game">
                   <option value="">Select Game (Optional)</option>
                   {% for game in games %}
-                    <option value="{{ game.id }}">{{ game.name }}</option>
+                  <option value="{{ game.id }}">{{ game.name }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -107,24 +78,14 @@
               <!-- Password -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Password</label>
-                <input
-                  class="form-control gaming-input"
-                  name="password"
-                  type="password"
-                  required
-                  minlength="6"
+                <input class="form-control gaming-input" name="password" type="password" required minlength="6"
                   placeholder="Enter password">
               </div>
 
               <!-- Confirm Password -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Confirm Password</label>
-                <input
-                  class="form-control gaming-input"
-                  name="confirm_password"
-                  type="password"
-                  required
-                  minlength="6"
+                <input class="form-control gaming-input" name="confirm_password" type="password" required minlength="6"
                   placeholder="Confirm password">
               </div>
 
@@ -145,54 +106,8 @@
   </div>
 </section>
 
-<!-- PAGE-SPECIFIC GAMING STYLES -->
-<style>
-  .gaming-title {
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-  }
+</section>
 
-  .gaming-card {
-    background: #0b0f17;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
-  }
-
-  .gaming-input {
-    background: #05070c;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-  }
-
-  .gaming-input:focus {
-    background: #05070c;
-    color: #fff;
-    border-color: #00ffff;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-  }
-
-  select.gaming-input {
-    height: auto;
-  }
-
-  .gaming-btn {
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    border: none;
-    border-radius: 30px;
-    padding: 12px 40px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #fff;
-  }
-
-  .gaming-btn:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-    transform: translateY(-2px);
-  }
-</style>
+{% endblock %}
 
 {% endblock %}

@@ -30,10 +30,7 @@
 
           <h4 class="text-white mb-4">Tournament Details</h4>
 
-          <form class="form-contact contact_form"
-                action="/add_tournament/"
-                method="post"
-                novalidate>
+          <form class="form-contact contact_form" action="/add_tournament/" method="post" novalidate>
 
             {% csrf_token %}
 
@@ -42,23 +39,17 @@
               <!-- Tournament Name -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Tournament Name</label>
-                <input class="form-control gaming-input"
-                       name="name"
-                       type="text"
-                       placeholder="Enter tournament name"
-                       required>
+                <input class="form-control gaming-input" name="name" type="text" placeholder="Enter tournament name"
+                  required>
               </div>
 
               <!-- Game Selection -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Select Game</label>
-                <select class="form-control gaming-input"
-                        name="game"
-                        size="5"
-                        required>
+                <select class="form-control gaming-input" name="game" required>
                   <option value="">Select Game</option>
                   {% for g in games %}
-                    <option value="{{ g.id }}">{{ g.name }}</option>
+                  <option value="{{ g.id }}">{{ g.name }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -66,85 +57,61 @@
               <!-- Description -->
               <div class="col-12 mb-4">
                 <label class="form-label text-white">Description</label>
-                <textarea class="form-control gaming-input"
-                          name="description"
-                          rows="4"
-                          placeholder="Tournament description"></textarea>
+                <textarea class="form-control gaming-input" name="description" rows="4"
+                  placeholder="Tournament description"></textarea>
               </div>
 
               <!-- Start & End Date -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Start Date</label>
-                <input class="form-control gaming-input"
-                       name="start_date"
-                       type="datetime-local">
+                <input class="form-control gaming-input" name="start_date" type="datetime-local">
               </div>
 
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">End Date</label>
-                <input class="form-control gaming-input"
-                       name="end_date"
-                       type="datetime-local">
+                <input class="form-control gaming-input" name="end_date" type="datetime-local">
               </div>
 
               <!-- Registration Dates -->
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Registration Open</label>
-                <input class="form-control gaming-input"
-                       name="registration_open_at"
-                       type="datetime-local">
+                <input class="form-control gaming-input" name="registration_open_at" type="datetime-local">
               </div>
 
               <div class="col-md-6 mb-4">
                 <label class="form-label text-white">Registration Close</label>
-                <input class="form-control gaming-input"
-                       name="registration_close_at"
-                       type="datetime-local">
+                <input class="form-control gaming-input" name="registration_close_at" type="datetime-local">
               </div>
 
               <!-- Max Teams / Fees -->
               <div class="col-md-4 mb-4">
                 <label class="form-label text-white">Max Teams</label>
-                <input class="form-control gaming-input"
-                       name="max_teams"
-                       type="number"
-                       placeholder="Default 16">
+                <input class="form-control gaming-input" name="max_teams" type="number" placeholder="Default 16">
               </div>
 
               <div class="col-md-4 mb-4">
                 <label class="form-label text-white">Entry Fee</label>
-                <input class="form-control gaming-input"
-                       name="entry_fee"
-                       type="number"
-                       step="0.01"
-                       placeholder="Entry fee">
+                <input class="form-control gaming-input" name="entry_fee" type="number" step="0.01"
+                  placeholder="Entry fee">
               </div>
 
               <div class="col-md-4 mb-4">
                 <label class="form-label text-white">Prize Pool</label>
-                <input class="form-control gaming-input"
-                       name="prize_pool"
-                       type="number"
-                       step="0.01"
-                       placeholder="Prize pool">
+                <input class="form-control gaming-input" name="prize_pool" type="number" step="0.01"
+                  placeholder="Prize pool">
               </div>
 
               <!-- Online / Location -->
               <div class="col-12 mb-4">
                 <div class="form-check mb-2">
-                  <input type="checkbox"
-                         class="form-check-input"
-                         name="is_online"
-                         id="is_online">
+                  <input type="checkbox" class="form-check-input" name="is_online" id="is_online">
                   <label class="form-check-label text-white" for="is_online">
                     Online Tournament
                   </label>
                 </div>
 
-                <input class="form-control gaming-input"
-                       name="location"
-                       type="text"
-                       placeholder="Location (if offline)">
+                <input class="form-control gaming-input" name="location" type="text"
+                  placeholder="Location (if offline)">
               </div>
 
             </div>
@@ -155,8 +122,7 @@
                 Save Tournament
               </button>
 
-              <a href="/tc_view_tournament/"
-                 class="btn gaming-btn-secondary flex-fill text-center">
+              <a href="/tc_view_tournament/" class="btn gaming-btn-secondary flex-fill text-center">
                 Back
               </a>
             </div>
@@ -171,68 +137,8 @@
   </div>
 </section>
 
-<!-- PAGE-SPECIFIC GAMING STYLES -->
-<style>
-  .gaming-title {
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-  }
+</section>
 
-  .gaming-card {
-    background: #0b0f17;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
-  }
-
-  .gaming-input {
-    background: #05070c;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-  }
-
-  .gaming-input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .gaming-input:focus {
-    background: #05070c;
-    color: #fff;
-    border-color: #00ffff;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-  }
-
-  .gaming-btn {
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    border: none;
-    border-radius: 30px;
-    padding: 12px 30px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #fff;
-  }
-
-  .gaming-btn:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-    transform: translateY(-2px);
-  }
-
-  .gaming-btn-secondary {
-    background: transparent;
-    border: 1px solid #00ffff;
-    border-radius: 30px;
-    padding: 12px 30px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #00ffff;
-  }
-
-  .gaming-btn-secondary:hover {
-    background: #00ffff;
-    color: #000;
-  }
-</style>
+{% endblock %}
 
 {% endblock %}
